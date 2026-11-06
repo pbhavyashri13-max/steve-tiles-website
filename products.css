@@ -1,4 +1,7 @@
-/* STEVE TILES - PRODUCT COLLECTIONS PAGE */
+
+/* =========================================
+   STEVE TILES - PREMIUM PRODUCT COLLECTIONS
+========================================= */
 
 .catalog-body {
     margin: 0;
@@ -11,9 +14,11 @@
     box-sizing: border-box;
 }
 
+/* HEADER */
+
 .catalog-header {
-    min-height: 78px;
-    background: #ffffff;
+    min-height: 82px;
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -47,6 +52,7 @@
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
+    transition: color .2s;
 }
 
 .catalog-nav a:hover,
@@ -57,8 +63,8 @@
 .catalog-nav .catalog-nav-button {
     background: #292722;
     color: white;
-    padding: 12px 20px;
-    border-radius: 3px;
+    padding: 13px 22px;
+    border-radius: 2px;
 }
 
 .catalog-nav .catalog-nav-button:hover {
@@ -69,12 +75,12 @@
 /* HERO */
 
 .catalog-hero {
-    min-height: 390px;
+    min-height: 420px;
     display: flex;
     align-items: center;
     padding: 65px 9%;
     background:
-        linear-gradient(90deg, rgba(25, 23, 20, 0.83), rgba(25, 23, 20, 0.18)),
+        linear-gradient(90deg, rgba(25,23,20,.85), rgba(25,23,20,.18)),
         url("https://italceramik.pl/app/uploads/2024/04/20240313-152824-scaled.jpg")
         center 55% / cover no-repeat;
 }
@@ -85,7 +91,7 @@
 }
 
 .catalog-eyebrow {
-    color: #b48a45;
+    color: #c9a66b;
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 2.5px;
@@ -93,7 +99,7 @@
 }
 
 .catalog-hero h1 {
-    font-size: clamp(34px, 4.5vw, 54px);
+    font-size: clamp(36px, 4.5vw, 56px);
     line-height: 1.15;
     margin: 0 0 18px;
 }
@@ -110,45 +116,46 @@
     background: #b48a45;
     color: white;
     text-decoration: none;
-    padding: 14px 25px;
+    padding: 15px 27px;
     font-size: 13px;
     font-weight: bold;
-    border-radius: 3px;
+    transition: .25s;
 }
 
 .catalog-hero-button:hover {
     background: #967039;
+    transform: translateY(-2px);
 }
 
 /* INTRO */
 
 .catalog-intro {
     text-align: center;
-    padding: 65px 20px 35px;
+    padding: 70px 20px 40px;
 }
 
 .catalog-intro h2,
 .catalog-help h2 {
     font-size: 32px;
-    margin: 0 0 12px;
+    margin: 0 0 14px;
     color: #292722;
 }
 
 .catalog-intro > p:last-child {
     color: #77736b;
-    line-height: 1.7;
+    line-height: 1.8;
     font-size: 14px;
 }
 
-/* CATALOG LAYOUT */
+/* MAIN CATALOG */
 
 .catalog-section {
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto;
-    padding: 25px 5% 80px;
+    padding: 25px 5% 85px;
     display: grid;
-    grid-template-columns: 225px 1fr;
-    gap: 38px;
+    grid-template-columns: 230px 1fr;
+    gap: 35px;
     align-items: start;
 }
 
@@ -156,6 +163,8 @@
     background: white;
     border: 1px solid #ebe7df;
     padding: 25px 20px;
+    position: sticky;
+    top: 105px;
 }
 
 .catalog-sidebar h3 {
@@ -167,7 +176,7 @@
     display: block;
     width: 100%;
     text-align: left;
-    padding: 13px 12px;
+    padding: 14px 12px;
     margin-bottom: 5px;
     border: none;
     background: transparent;
@@ -175,6 +184,7 @@
     font-size: 14px;
     cursor: pointer;
     border-radius: 3px;
+    transition: .2s;
 }
 
 .category-filter:hover,
@@ -210,12 +220,12 @@
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
 }
 
 .catalog-toolbar h2 {
-    font-size: 23px;
-    margin: 0 0 7px;
+    font-size: 25px;
+    margin: 0 0 8px;
 }
 
 .catalog-toolbar p {
@@ -225,12 +235,12 @@
 }
 
 .catalog-toolbar input {
-    width: 270px;
+    width: 290px;
     max-width: 100%;
-    padding: 13px 15px;
+    padding: 14px 16px;
     border: 1px solid #ded9cf;
     background: white;
-    border-radius: 3px;
+    border-radius: 2px;
     outline: none;
 }
 
@@ -245,43 +255,51 @@
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .catalog-filters select {
-    min-width: 150px;
-    padding: 11px 13px;
+    min-width: 155px;
+    padding: 12px 14px;
     background: white;
     border: 1px solid #ded9cf;
     color: #5e5950;
-    border-radius: 3px;
+    border-radius: 2px;
     outline: none;
+    cursor: pointer;
 }
 
-/* PRODUCT CARDS */
+/* PRODUCT GRID */
 
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
+    gap: 25px;
+    align-items: stretch;
 }
 
+/* PRODUCT CARD */
+
 .tile-card {
-    background: white;
-    border: 1px solid #ebe7df;
-    transition: transform 0.25s, box-shadow 0.25s;
+    background: #fff;
+    border: 1px solid #e9e4da;
     min-width: 0;
+    overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
 }
 
 .tile-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 28px rgba(50, 43, 30, 0.10);
+    transform: translateY(-6px);
+    box-shadow: 0 14px 32px rgba(50,43,30,.12);
 }
 
+/* IMAGE AREA */
+
 .tile-image-wrap {
-    height: 220px;
+    height: 260px;
     overflow: hidden;
     background: #eeeae2;
+    position: relative;
 }
 
 .tile-image-wrap img {
@@ -289,15 +307,17 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.35s;
+    transition: transform .45s;
 }
 
 .tile-card:hover .tile-image-wrap img {
-    transform: scale(1.05);
+    transform: scale(1.07);
 }
 
+/* PRODUCT DETAILS */
+
 .tile-card-content {
-    padding: 18px;
+    padding: 21px;
 }
 
 .tile-category {
@@ -305,49 +325,57 @@
     color: #a47b3d;
     font-size: 10px;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 9px;
+    margin-bottom: 10px;
 }
 
 .tile-card h3 {
-    font-size: 17px;
-    margin: 0 0 12px;
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 0 0 14px;
+    color: #292722;
 }
 
 .tile-specs {
     display: flex;
     flex-wrap: wrap;
-    gap: 7px;
-    margin-bottom: 16px;
+    gap: 8px;
+    margin-bottom: 18px;
 }
 
 .tile-specs span {
     background: #f5f2ec;
     color: #666057;
-    padding: 6px 8px;
+    padding: 7px 10px;
     font-size: 11px;
+    border: 1px solid #eee9df;
 }
 
 .tile-price {
     font-size: 13px;
     color: #87704b;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
+    line-height: 1.6;
 }
+
+/* BUTTONS */
 
 .tile-actions {
     display: flex;
-    gap: 9px;
+    gap: 10px;
 }
 
 .tile-actions button {
     flex: 1;
+    min-height: 42px;
     padding: 11px 7px;
     font-size: 11px;
     font-weight: bold;
     cursor: pointer;
     border: 1px solid #292722;
     border-radius: 2px;
+    transition: .25s;
 }
 
 .view-details {
@@ -362,6 +390,7 @@
 
 .view-details:hover {
     background: #f2eee6;
+    border-color: #b48a45;
 }
 
 .enquire-tile:hover {
@@ -369,10 +398,12 @@
     border-color: #b48a45;
 }
 
+/* EMPTY PRODUCTS */
+
 .empty-products {
     text-align: center;
     background: white;
-    padding: 45px 20px;
+    padding: 50px 20px;
     border: 1px solid #ebe7df;
 }
 
@@ -384,7 +415,7 @@
     background: #292722;
     color: white;
     border: none;
-    padding: 12px 22px;
+    padding: 13px 24px;
     cursor: pointer;
 }
 
@@ -392,7 +423,7 @@
 
 .catalog-help {
     background: #eee9df;
-    padding: 45px 8%;
+    padding: 50px 8%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -408,10 +439,11 @@
 .catalog-help a {
     background: #292722;
     color: white;
-    padding: 15px 23px;
+    padding: 15px 25px;
     text-decoration: none;
     white-space: nowrap;
     font-size: 13px;
+    transition: .25s;
 }
 
 .catalog-help a:hover {
@@ -424,7 +456,7 @@
     background: #24221e;
     color: #ddd8cf;
     text-align: center;
-    padding: 35px 15px;
+    padding: 38px 15px;
 }
 
 .catalog-footer .catalog-logo {
@@ -444,12 +476,12 @@
     max-height: 90vh;
     border: none;
     padding: 0;
-    border-radius: 5px;
+    border-radius: 4px;
     overflow: auto;
 }
 
 .catalog-dialog::backdrop {
-    background: rgba(20, 19, 17, 0.65);
+    background: rgba(20,19,17,.70);
 }
 
 .dialog-content {
@@ -470,7 +502,7 @@
 
 .dialog-product-image {
     width: 100%;
-    height: 250px;
+    height: 280px;
     object-fit: cover;
     margin-bottom: 20px;
 }
@@ -490,7 +522,7 @@
     display: inline-block;
     margin-top: 10px;
     border: none;
-    padding: 13px 20px;
+    padding: 14px 22px;
     background: #292722;
     color: white;
     cursor: pointer;
@@ -511,7 +543,7 @@
 .enquiry-content textarea {
     display: block;
     width: 100%;
-    padding: 12px;
+    padding: 13px;
     border: 1px solid #ded9cf;
     font: inherit;
     outline: none;
@@ -525,12 +557,16 @@
 .enquiry-submit {
     margin-top: 20px;
     width: 100%;
-    padding: 14px;
+    padding: 15px;
     background: #292722;
     color: white;
     border: none;
     cursor: pointer;
     font-weight: bold;
+}
+
+.enquiry-submit:hover {
+    background: #b48a45;
 }
 
 .enquiry-success {
@@ -539,7 +575,7 @@
     margin-top: 15px;
 }
 
-/* DESKTOP ADAPTATION */
+/* TABLET */
 
 @media (max-width: 1100px) {
     .product-grid {
@@ -554,7 +590,13 @@
     .catalog-nav {
         gap: 18px;
     }
+
+    .tile-image-wrap {
+        height: 270px;
+    }
 }
+
+/* MOBILE */
 
 @media (max-width: 760px) {
     .catalog-header {
@@ -581,9 +623,12 @@
 
     .catalog-section {
         grid-template-columns: 1fr;
+        padding-left: 5%;
+        padding-right: 5%;
     }
 
     .catalog-sidebar {
+        position: static;
         padding: 18px;
     }
 
@@ -602,13 +647,15 @@
     }
 }
 
+/* SMALL MOBILE */
+
 @media (max-width: 500px) {
     .product-grid {
         grid-template-columns: 1fr;
     }
 
     .tile-image-wrap {
-        height: 240px;
+        height: 270px;
     }
 
     .catalog-toolbar {
@@ -635,5 +682,48 @@
 
     .dialog-content {
         padding: 25px 18px;
+    }
+
+    .dialog-product-image {
+        height: 220px;
+    }
+}
+/* CENTER ALL POPUP BOXES */
+
+dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    max-height: 85vh;
+    overflow-y: auto;
+    border: none;
+    border-radius: 16px;
+    background: #ffffff;
+    padding: 25px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* PRODUCT DETAILS POPUP */
+#productDialog {
+    width: min(850px, 90%);
+}
+
+/* ENQUIRY POPUP */
+#enquiryDialog {
+    width: min(520px, 90%);
+}
+
+/* DARK BACKGROUND BEHIND POPUPS */
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.55);
+}
+
+/* MOBILE VIEW */
+@media (max-width: 600px) {
+    dialog {
+        max-width: 92%;
+        padding: 16px;
     }
 }

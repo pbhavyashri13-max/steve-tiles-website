@@ -1,4 +1,3 @@
-
 /* =================================
    STEVE TILES - RESPONSIVE WEBSITE
 ================================= */
@@ -126,7 +125,7 @@ button, input, select, textarea {
     cursor: pointer;
 }
 
-/* HERO */
+/* HERO AUTOMATIC IMAGE SLIDESHOW */
 
 .hero {
     min-height: 650px;
@@ -134,14 +133,56 @@ button, input, select, textarea {
     display: flex;
     align-items: center;
     color: white;
-    background:
-        url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90")
-        center 55% / cover no-repeat;
+    overflow: hidden;
+    isolation: isolate;
+    background: #292722;
+}
+
+.hero-slides {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: scale(1.03);
+    animation: heroSlideshow 15s infinite;
+}
+
+.slide-one {
+    background-image: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90");
+    animation-delay: 0s;
+}
+
+.slide-two {
+    background-image: url("https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=2000&q=90");
+    animation-delay: 5s;
+}
+
+.slide-three {
+    background-image: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=90");
+    animation-delay: 10s;
+}
+
+@keyframes heroSlideshow {
+    0% { opacity: 0; }
+    8% { opacity: 1; }
+    30% { opacity: 1; }
+    38% { opacity: 0; }
+    100% { opacity: 0; }
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background: linear-gradient(
         90deg,
         rgba(31,29,25,.88),
@@ -152,7 +193,7 @@ button, input, select, textarea {
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     padding-top: 65px;
     padding-bottom: 95px;
 }
@@ -260,6 +301,7 @@ button, input, select, textarea {
 
 .hero-bottom {
     position: absolute;
+    z-index: 2;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -376,14 +418,18 @@ button, input, select, textarea {
 
 .category-card {
     position: relative;
-    height: 370px;
+    aspect-ratio: 1 / 1;
+    height: auto;
     overflow: hidden;
     color: white;
     background: #ded8cd;
 }
 
 .category-card img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center;
     transition: transform .6s;
 }
 
@@ -818,7 +864,10 @@ button, input, select, textarea {
 
     .hero {
         min-height: 620px;
-        background-position: 58% center;
+    }
+
+    .hero-slide {
+        background-position: center;
     }
 
     .hero-content {

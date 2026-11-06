@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,8 +46,14 @@
 
 <main>
 
-<!-- HERO -->
+<!-- HERO WITH AUTOMATIC SLIDESHOW -->
 <section class="hero" id="home">
+
+    <div class="hero-slides" aria-hidden="true">
+        <div class="hero-slide slide-one"></div>
+        <div class="hero-slide slide-two"></div>
+        <div class="hero-slide slide-three"></div>
+    </div>
 
     <div class="hero-overlay"></div>
 
@@ -167,59 +172,64 @@
 
         <div class="category-grid">
 
-            <a href="products.html?category=floor" class="category-card">
-                <img
-                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=750&q=85"
-                    alt="Modern floor tile interior"
-                    loading="lazy"
-                >
-                <div class="category-info">
-                    <span>01 / COLLECTION</span>
-                    <h3>Floor Tiles</h3>
-                    <p>Explore Collection ↗</p>
-                </div>
-            </a>
-
-            <a href="products.html?category=wall" class="category-card">
-                <img
-                    src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=750&q=85"
-                    alt="Decorative wall tile interior"
-                    loading="lazy"
-                >
-                <div class="category-info">
-                    <span>02 / COLLECTION</span>
-                    <h3>Wall Tiles</h3>
-                    <p>Explore Collection ↗</p>
-                </div>
-            </a>
-
-            <a href="products.html?category=bathroom" class="category-card">
-                <img
-                    src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=750&q=85"
-                    alt="Premium bathroom interior"
-                    loading="lazy"
-                >
-                <div class="category-info">
-                    <span>03 / COLLECTION</span>
-                    <h3>Bathroom Tiles</h3>
-                    <p>Explore Collection ↗</p>
-                </div>
-            </a>
-
-            <a href="products.html?category=kitchen" class="category-card">
-                <img
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=750&q=85"
-                    alt="Modern kitchen interior"
-                    loading="lazy"
-                >
-                <div class="category-info">
-                    <span>04 / COLLECTION</span>
-                    <h3>Kitchen Tiles</h3>
-                    <p>Explore Collection ↗</p>
-                </div>
-            </a>
-
+    <!-- FLOOR TILES: Living room -->
+    <a href="products.html?category=floor" class="category-card">
+        <img
+            src="https://ssl.cdn-redfin.com/photo/77/mbphotov3/992/genMid.226044992_0.jpg"
+            alt="Living room with large tiled flooring"
+            loading="lazy"
+        >
+        <div class="category-info">
+            <span>01 / COLLECTION</span>
+            <h3>Floor Tiles</h3>
+            <p>Explore Collection ↗</p>
         </div>
+    </a>
+
+    <!-- WALL TILES: Feature wall living room -->
+    <a href="products.html?category=wall" class="category-card">
+        <img
+            src="https://cdn11.bigcommerce.com/s-4990d/images/stencil/2560w/products/31035/49163/60-326_8x8_Form_Sand_Deco_Blend_Porcelain__Tile_Lifestyle_-_Copy__32688.1641303367.jpg?c=2"
+            alt="Living room with decorative tiled feature wall"
+            loading="lazy"
+        >
+        <div class="category-info">
+            <span>02 / COLLECTION</span>
+            <h3>Wall Tiles</h3>
+            <p>Explore Collection ↗</p>
+        </div>
+    </a>
+
+    <!-- BATHROOM TILES: Complete bathroom -->
+    <a href="products.html?category=bathroom" class="category-card">
+    <img
+        src="https://images.unsplash.com/photo-1758239873506-82d0e76244f6?auto=format&fit=crop&w=1000&q=85"
+        alt="Complete modern bathroom with vanity and tiled floor"
+        loading="eager"
+        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=85';"
+    >
+    <div class="category-info">
+        <span>03 / COLLECTION</span>
+        <h3>Bathroom Tiles</h3>
+        <p>Explore Collection ↗</p>
+    </div>
+</a>
+
+    <!-- KITCHEN TILES: Complete kitchen -->
+    <a href="products.html?category=kitchen" class="category-card">
+        <img
+            src="https://www.in2assets.co.za/uploads/users/12397/3848/image_exclusive-mansion-with-golf-course-and-sea-views_ri2wGotmMzLd.jpg"
+            alt="Complete modern kitchen with tiled backsplash and floor"
+            loading="lazy"
+        >
+        <div class="category-info">
+            <span>04 / COLLECTION</span>
+            <h3>Kitchen Tiles</h3>
+            <p>Explore Collection ↗</p>
+        </div>
+    </a>
+
+</div>
 
     </div>
 
@@ -333,51 +343,53 @@
 </section>
 
 <!-- GALLERY -->
+<!-- GALLERY -->
 <section class="gallery section-padding" id="gallery">
 
     <div class="container">
 
         <div class="section-heading">
-
             <div>
                 <p class="section-label">VISUAL INSPIRATION</p>
                 <h2>Explore Beautiful <span>Spaces.</span></h2>
             </div>
 
             <p>
-                Discover how beautiful tile designs
-                can complement different interiors.
+                Get inspired by complete interiors featuring
+                beautiful tile designs.
             </p>
-
         </div>
 
         <div class="gallery-grid">
 
+            <!-- LIVING ROOM -->
             <div class="gallery-item gallery-large">
                 <img
-                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1100&q=85"
-                    alt="Living room interior"
+                    src="https://photos.zillowstatic.com/fp/1976f2b19cf295f7b6c75d14b5bbe014-cc_ft_576.jpg"
+                    alt="Full living room with marble-look tiled flooring"
                     loading="lazy"
                 >
                 <span>Living Room</span>
             </div>
 
+            <!-- BATHROOM -->
             <div class="gallery-item">
                 <img
-                    src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=850&q=85"
-                    alt="Bathroom interior"
+                    src="https://images.finncdn.no/dynamic/1600w/2026/2/vertical-2/25/5/452/703/915_877450cd-dc40-48ae-97d1-c2ce05b5f23a.jpg"
+                    alt="Complete bathroom with tiled walls, shower and vanity"
                     loading="lazy"
                 >
                 <span>Bathroom</span>
             </div>
 
+            <!-- KITCHEN -->
             <div class="gallery-item">
                 <img
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=850&q=85"
-                    alt="Dining and interior space"
+                    src="https://lid.zoocdn.com/u/1024/768/3596cd815bccc8959e681eb6fcb9607750917a58.jpg"
+                    alt="Complete modern kitchen with tiled backsplash and floor"
                     loading="lazy"
                 >
-                <span>Dining Area</span>
+                <span>Kitchen</span>
             </div>
 
         </div>

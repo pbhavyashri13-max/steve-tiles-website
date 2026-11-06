@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steve Tiles | Admin Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --dark:#252522;
+    --dark2:#33332e;
+    --gold:#b99a62;
+    --cream:#f5f2eb;
+    --white:#fff;
+    --muted:#89877f;
+    --line:#e9e5dc;
+    --green:#527b62;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.login-screen{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#242420,#494438)}
+.login-card{background:white;width:100%;max-width:420px;padding:42px;border-radius:12px}
+.brand{text-align:center;font-family:'Playfair Display',serif;font-size:27px;letter-spacing:2px}
+.brand span{color:var(--gold)}
+.login-sub{text-align:center;color:var(--muted);font-size:13px;margin:9px 0 28px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:700;margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:6px;background:white;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
+.primary{background:var(--gold);color:white;border:0;padding:12px 18px;border-radius:5px;font-weight:700}
+.primary:hover{background:#9e804c}
+.login-card .primary{width:100%;margin-top:5px}
+.login-note{text-align:center;font-size:11px;color:var(--muted);margin-top:16px}
+.app{display:none;min-height:100vh}
+.sidebar{width:250px;background:var(--dark);color:white;position:fixed;inset:0 auto 0 0;padding:25px 17px;z-index:10;overflow-y:auto}
+.side-brand{font-family:'Playfair Display',serif;font-size:24px;letter-spacing:2px;padding:5px 12px 28px;border-bottom:1px solid #484841}
+.side-brand span{color:var(--gold)}
+.side-label{font-size:10px;color:#aaa69a;letter-spacing:2px;margin:27px 12px 12px}
+.nav-btn{width:100%;display:flex;align-items:center;gap:12px;padding:12px;border:0;background:transparent;color:#d6d2c8;text-align:left;border-radius:6px;margin:3px 0;font-size:13px}
+.nav-btn:hover,.nav-btn.active{background:#41413a;color:white}
+.nav-btn.active{border-left:3px solid var(--gold)}
+.nav-icon{width:20px;text-align:center;color:var(--gold)}
+.sidebar-bottom{margin-top:35px;border-top:1px solid #484841;padding-top:17px}
+.main{margin-left:250px;min-height:100vh}
+.topbar{height:76px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 35px;position:sticky;top:0;z-index:5}
+.topbar small{color:var(--muted)}
+.admin-profile{display:flex;align-items:center;gap:11px;font-size:13px}
+.avatar{width:37px;height:37px;border-radius:50%;background:#e8dfcc;color:#715b37;display:grid;place-items:center;font-weight:700}
+.content{padding:32px 35px;max-width:1450px;margin:auto}
+.page{display:none}
+.page.active{display:block}
+.page-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px;flex-wrap:wrap}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
+.page-heading h1{font-size:30px}
+.page-heading p{font-size:13px;color:var(--muted);margin-top:6px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:17px;margin-bottom:25px}
+.stat,.panel,.action-card{background:white;border:1px solid var(--line);border-radius:9px}
+.stat{padding:21px}
+.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.stat-icon{background:#f4efe5;color:var(--gold);width:35px;height:35px;display:grid;place-items:center;border-radius:7px;font-size:17px}
+.stat h2{font-family:'DM Sans',sans-serif;font-size:28px;margin:17px 0 4px}
+.stat p{font-size:11px;color:var(--muted)}
+.panel{padding:23px;margin-bottom:22px}
+.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.panel-heading h2{font-size:20px}
+.panel-heading p{font-size:12px;color:var(--muted);margin-top:4px}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.action-card{padding:20px;text-align:left;border:1px solid var(--line);color:var(--dark)}
+.action-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.action-card span{font-size:22px;color:var(--gold)}
+.action-card h3{font-size:17px;margin:12px 0 5px}
+.action-card p{font-size:12px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;color:var(--muted);font-weight:600;background:#faf9f6}
+th,td{padding:14px 12px;border-bottom:1px solid var(--line)}
+.empty{text-align:center;color:var(--muted);padding:25px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 18px}
+.form-actions{display:flex;gap:10px;margin-top:10px}
+.secondary{background:white;border:1px solid var(--line);padding:11px 17px;border-radius:5px;color:var(--dark)}
+.danger{color:#a94c43;border:0;background:transparent;font-size:12px}
+.status{padding:5px 9px;border-radius:20px;background:#edf3ed;color:var(--green);font-size:10px}
+.preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.preview-card{border:1px solid var(--line);border-radius:7px;overflow:hidden;background:#faf9f6}
+.preview-card img{width:100%;height:125px;object-fit:cover;display:block}
+.preview-card p{font-size:11px;padding:9px;word-break:break-word}
+.notice{background:#f8f4eb;border-left:3px solid var(--gold);padding:13px 15px;font-size:12px;color:#6e624e;margin-bottom:18px;line-height:1.6}
+.mobile-menu{display:none;border:0;background:transparent;font-size:22px}
+.section-help{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 18px}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:repeat(2,1fr)}.preview-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){
+.sidebar{transform:translateX(-100%);transition:.25s}.sidebar.open{transform:translateX(0)}
+.main{margin-left:0}.mobile-menu{display:block}.topbar{padding:0 17px;height:65px}
+.content{padding:23px 16px}.stats{gap:10px}.stat{padding:15px}.stat h2{font-size:23px}
+.actions{grid-template-columns:1fr 1fr}.preview-grid{grid-template-columns:repeat(2,1fr)}
+.form-grid{grid-template-columns:1fr}.page-heading h1{font-size:25px}
+.panel{padding:16px;overflow-x:auto}table{min-width:560px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ADMIN LOGIN -->
+<section class="login-screen" id="loginScreen">
+    <div class="login-card">
+        <div class="brand">STEVE <span>TILES.</span></div>
+        <p class="login-sub">ADMINISTRATION PORTAL</p>
+        <form id="loginForm">
+            <div class="field">
+                <label>ADMIN USERNAME</label>
+                <input id="username" type="text" placeholder="Enter username" required>
+            </div>
+            <div class="field">
+                <label>PASSWORD</label>
+                <input id="password" type="password" placeholder="Enter password" required>
+            </div>
+            <button class="primary" type="submit">Sign In to Dashboard</button>
+        </form>
+        <p class="login-note">Demo login: admin / steve123</p>
+    </div>
+</section>
+
+<!-- ADMIN APPLICATION -->
+<div class="app" id="adminApp">
+<aside class="sidebar" id="sidebar">
+    <div class="side-brand">STEVE <span>TILES.</span></div>
+    <p class="side-label">MAIN MENU</p>
+    <button class="nav-btn active" data-page="overview"><span class="nav-icon">▦</span>Dashboard Overview</button>
+    <button class="nav-btn" data-page="products"><span class="nav-icon">▤</span>Product Management</button>
+    <button class="nav-btn" data-page="categories"><span class="nav-icon">◫</span>Category Management</button>
+    <button class="nav-btn" data-page="images"><span class="nav-icon">▧</span>Image Management</button>
+    <button class="nav-btn" data-page="gallery"><span class="nav-icon">▦</span>Gallery Management</button>
+    <button class="nav-btn" data-page="enquiries"><span class="nav-icon">✉</span>Customer Enquiries</button>
+    <p class="side-label">STORE</p>
+    <button class="nav-btn" data-page="store"><span class="nav-icon">⌂</span>Store Information</button>
+    <button class="nav-btn" onclick="window.open('index.html','_blank')"><span class="nav-icon">↗</span>View Website</button>
+    <div class="sidebar-bottom">
+        <button class="nav-btn" id="logoutBtn"><span class="nav-icon">⇥</span>Logout</button>
+    </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+    <div style="display:flex;align-items:center;gap:13px">
+        <button class="mobile-menu" id="mobileMenu">☰</button>
+        <div><strong id="topTitle">Dashboard Overview</strong><br><small>Steve Tiles / Admin Panel</small></div>
+    </div>
+    <div class="admin-profile"><div class="avatar">A</div><div><strong>Administrator</strong><br><small>Store Manager</small></div></div>
+</header>
+
+<div class="content">
+
+<!-- OVERVIEW -->
+<section class="page active" id="overview">
+    <div class="page-heading">
+        <div><h1>Welcome Back, Admin</h1><p>Manage your Steve Tiles showroom website from one place.</p></div>
+        <span id="todayDate" style="font-size:12px;color:#89877f"></span>
+    </div>
+    <div class="stats">
+        <div class="stat"><div class="stat-top">Total Products <span class="stat-icon">▤</span></div><h2 id="productCount">12</h2><p>Products in your catalogue</p></div>
+        <div class="stat"><div class="stat-top">Categories <span class="stat-icon">◫</span></div><h2 id="categoryCount">5</h2><p>Tile categories</p></div>
+        <div class="stat"><div class="stat-top">Customer Enquiries <span class="stat-icon">✉</span></div><h2 id="enquiryCount">0</h2><p>Enquiries received in this browser</p></div>
+        <div class="stat"><div class="stat-top">Uploaded Images <span class="stat-icon">▧</span></div><h2 id="imageCount">0</h2><p>Image previews in this session</p></div>
+    </div>
+    <div class="panel">
+        <div class="panel-heading"><div><h2>Quick Management</h2><p>Choose a section to manage your showroom website.</p></div></div>
+        <div class="actions">
+            <button class="action-card" data-go="products"><span>▤</span><h3>Manage Products</h3><p>Add and organise tile products.</p></button>
+            <button class="action-card" data-go="categories"><span>◫</span><h3>Manage Categories</h3><p>Organise your tile collections.</p></button>
+            <button class="action-card" data-go="images"><span>▧</span><h3>Upload Images</h3><p>Preview product images.</p></button>
+            <button class="action-card" data-go="enquiries"><span>✉</span><h3>Customer Enquiries</h3><p>Review customer messages.</p></button>
+            <button class="action-card" data-go="gallery"><span>▦</span><h3>Manage Gallery</h3><p>Preview showroom inspiration images.</p></button>
+            <button class="action-card" data-go="store"><span>⌂</span><h3>Store Information</h3><p>Review showroom details.</p></button>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel-heading"><div><h2>Recent Customer Enquiries</h2><p>Latest messages submitted through the website.</p></div><button class="secondary" data-go="enquiries">View All</button></div>
+        <div id="recentEnquiries"></div>
+    </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="page" id="products">
+    <div class="page-heading"><div><h1>Product Management</h1><p>Maintain your tile catalogue and product information.</p></div></div>
+    <div class="notice">Add product details here for your admin demonstration. The saved records are stored in this browser and are not yet connected to the public product catalogue.</div>
+    <div class="panel">
+        <div class="panel-heading"><div><h2>Add a Product</h2><p>Enter the product information below.</p></div></div>
+        <form id="productForm">
+            <div class="form-grid">
+                <div class="field"><label>PRODUCT NAME</label><input id="pName" required placeholder="e.g. Premium Marble Tile"></div>
+                <div class="field"><label>PRODUCT CODE</label><input id="pCode" required placeholder="e.g. ST013"></div>
+                <div class="field"><label>CATEGORY</label><select id="pCategory"><option>Floor</option><option>Wall</option><option>Bathroom</option><option>Kitchen</option><option>Outdoor</option></select></div>
+                <div class="field"><label>PRICE (OPTIONAL)</label><input id="pPrice" type="number" min="0" placeholder="Price"></div>
+                <div class="field"><label>SIZE</label><input id="pSize" placeholder="e.g. 600 x 1200 mm"></div>
+                <div class="field"><label>FINISH</label><input id="pFinish" placeholder="e.g. Glossy / Matte"></div>
+            </div>
+            <div class="form-actions"><button class="primary" type="submit">Save Product</button><button class="secondary" type="reset">Clear</button></div>
+        </form>
+    </div>
+    <div class="panel"><div class="panel-heading"><h2>Added Products</h2></div><div id="productTable"></div></div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="page" id="categories">
+    <div class="page-heading"><div><h1>Category Management</h1><p>Organise collections for easier customer browsing.</p></div></div>
+    <div class="panel">
+        <div class="panel-heading"><h2>Add a Category</h2></div>
+        <form id="categoryForm">
+            <div class="field"><label>CATEGORY NAME</label><input id="categoryName" required placeholder="e.g. Living Room Tiles"></div>
+            <button class="primary" type="submit">Add Category</button>
+        </form>
+    </div>
+    <div class="panel"><div class="panel-heading"><h2>Available Categories</h2></div><div id="categoryList"></div></div>
+</section>
+
+<!-- IMAGE MANAGEMENT -->
+<section class="page" id="images">
+    <div class="page-heading"><div><h1>Image Management</h1><p>Preview images for your product catalogue.</p></div></div>
+    <div class="notice">Choose image files from your computer. These are temporary browser previews; permanent website image storage is not connected yet.</div>
+    <div class="panel">
+        <div class="field"><label>SELECT PRODUCT IMAGES</label><input type="file" id="imageUpload" accept="image/*" multiple></div>
+        <div id="imagePreviews" class="preview-grid"></div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section class="page" id="gallery">
+    <div class="page-heading"><div><h1>Gallery Management</h1><p>Showcase tile installations and interior inspiration.</p></div></div>
+    <div class="notice">Upload showroom, kitchen, bathroom and interior photos to preview them in this admin area.</div>
+    <div class="panel">
+        <div class="field"><label>SELECT GALLERY PHOTOS</label><input type="file" id="galleryUpload" accept="image/*" multiple></div>
+        <div id="galleryPreviews" class="preview-grid"></div>
+    </div>
+</section>
+
+<!-- ENQUIRIES -->
+<section class="page" id="enquiries">
+    <div class="page-heading"><div><h1>Customer Enquiries</h1><p>Review messages submitted by customers through your website.</p></div><button class="secondary" id="refreshEnquiries">Refresh</button></div>
+    <div class="notice">Enquiries appear here when submitted through the website in the same browser, provided the form saves them using the <strong>steveTilesEnquiries</strong> localStorage key.</div>
+    <div class="panel"><div id="allEnquiries"></div></div>
+</section>
+
+<!-- STORE INFORMATION -->
+<section class="page" id="store">
+    <div class="page-heading"><div><h1>Store Information</h1><p>Showroom details and customer contact information.</p></div></div>
+    <div class="panel">
+        <h2 style="margin-bottom:18px">Steve Tiles Showroom</h2>
+        <p class="section-help">Use this section to review the business information displayed on your customer website.</p>
+        <div class="field"><label>BUSINESS NAME</label><input value="Steve Tiles" readonly></div>
+        <div class="field"><label>WEBSITE</label><input value="Steve Tiles – Premium Tile Collections" readonly></div>
+        <div class="field"><label>PRODUCT RANGE</label><input value="Floor Tiles, Wall Tiles, Bathroom Tiles, Kitchen Tiles" readonly></div>
+        <div class="field"><label>WEBSITE FEATURES</label><textarea rows="4" readonly>Product catalogue, category browsing, product search and filters, image gallery, customer enquiry form and showroom contact details.</textarea></div>
+        <p class="section-help">Add your verified showroom address, phone number and email to the public website when those details are available.</p>
+    </div>
+</section>
+
+</div>
+</main>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function showApp(){
+    $('loginScreen').style.display='none';
+    $('adminApp').style.display='block';
+    $('todayDate').textContent=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+    renderProducts();renderCategories();loadEnquiries();
+}
+$('loginForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    if($('username').value==='admin' && $('password').value==='steve123'){
+        sessionStorage.setItem('steveAdminLoggedIn','yes');
+        showApp();
+    }else alert('Incorrect username or password. Please try again.');
+});
+$('logoutBtn').addEventListener('click',()=>{
+    sessionStorage.removeItem('steveAdminLoggedIn');
+    location.reload();
+});
+if(sessionStorage.getItem('steveAdminLoggedIn')==='yes') showApp();
+
+function openPage(page){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    $(page).classList.add('active');
+    document.querySelectorAll('.nav-btn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+    $('topTitle').textContent=document.querySelector('.nav-btn[data-page="'+page+'"]').textContent.trim();
+    $('sidebar').classList.remove('open');
+}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.go)));
+$('mobileMenu').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
+
+let adminProducts=JSON.parse(localStorage.getItem('steveAdminProducts')||'[]');
+let adminCategories=JSON.parse(localStorage.getItem('steveAdminCategories')||'["Floor","Wall","Bathroom","Kitchen","Outdoor"]');
+
+$('productForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    adminProducts.push({
+        name:$('pName').value,code:$('pCode').value,
+        category:$('pCategory').value,price:$('pPrice').value,
+        size:$('pSize').value,finish:$('pFinish').value
+    });
+    localStorage.setItem('steveAdminProducts',JSON.stringify(adminProducts));
+    e.target.reset();renderProducts();
+    alert('Product saved in this browser.');
+});
+function renderProducts(){
+    $('productCount').textContent=12+adminProducts.length;
+    if(!adminProducts.length){$('productTable').innerHTML='<p class="empty">No additional products added yet.</p>';return;}
+    $('productTable').innerHTML='<table><thead><tr><th>Product</th><th>Code</th><th>Category</th><th>Price</th><th>Action</th></tr></thead><tbody>'+
+    adminProducts.map((p,i)=>`<tr><td>${safe(p.name)}</td><td>${safe(p.code)}</td><td>${safe(p.category)}</td><td>${p.price?'₹'+safe(p.price):'—'}</td><td><button class="danger" onclick="deleteProduct(${i})">Delete</button></td></tr>`).join('')+
+    '</tbody></table>';
+}
+function deleteProduct(i){
+    if(confirm('Delete this product?')){adminProducts.splice(i,1);localStorage.setItem('steveAdminProducts',JSON.stringify(adminProducts));renderProducts();}
+}
+
+$('categoryForm').addEventListener('submit',e=>{
+    e.preventDefault();const name=$('categoryName').value.trim();
+    if(adminCategories.some(c=>c.toLowerCase()===name.toLowerCase())){alert('This category already exists.');return;}
+    adminCategories.push(name);localStorage.setItem('steveAdminCategories',JSON.stringify(adminCategories));
+    e.target.reset();renderCategories();
+});
+function renderCategories(){
+    $('categoryCount').textContent=adminCategories.length;
+    $('categoryList').innerHTML='<table><thead><tr><th>Category</th><th>Status</th><th>Action</th></tr></thead><tbody>'+
+    adminCategories.map((c,i)=>`<tr><td>${safe(c)}</td><td><span class="status">Available</span></td><td><button class="danger" onclick="deleteCategory(${i})">Delete</button></td></tr>`).join('')+
+    '</tbody></table>';
+}
+function deleteCategory(i){
+    if(confirm('Delete this category?')){adminCategories.splice(i,1);localStorage.setItem('steveAdminCategories',JSON.stringify(adminCategories));renderCategories();}
+}
+
+let uploadedImages=0;
+function previewFiles(input,target){
+    [...input.files].forEach(file=>{
+        if(!file.type.startsWith('image/'))return;
+        const reader=new FileReader();
+        reader.onload=e=>{
+            const card=document.createElement('div');card.className='preview-card';
+            const img=document.createElement('img');img.src=e.target.result;
+            const p=document.createElement('p');p.textContent=file.name;
+            card.append(img,p);$(target).appendChild(card);
+            uploadedImages++;$('imageCount').textContent=uploadedImages;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+$('imageUpload').addEventListener('change',()=>previewFiles($('imageUpload'),'imagePreviews'));
+$('galleryUpload').addEventListener('change',()=>previewFiles($('galleryUpload'),'galleryPreviews'));
+
+function safe(value){
+    return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function loadEnquiries(){
+    let enquiries=[];
+    try{enquiries=JSON.parse(localStorage.getItem('steveTilesEnquiries')||'[]');}catch(e){}
+    $('enquiryCount').textContent=enquiries.length;
+    const html=enquiries.length?'<table><thead><tr><th>Customer</th><th>Email</th><th>Phone</th><th>Product</th><th>Message</th></tr></thead><tbody>'+
+    enquiries.map(q=>`<tr><td>${safe(q.name||'—')}</td><td>${safe(q.email||'—')}</td><td>${safe(q.phone||'—')}</td><td>${safe(q.product||'—')}</td><td>${safe(q.message||'—')}</td></tr>`).join('')+
+    '</tbody></table>':'<p class="empty">No customer enquiries found in this browser yet.</p>';
+    $('allEnquiries').innerHTML=html;
+    $('recentEnquiries').innerHTML=enquiries.length?html:'<p class="empty">No enquiries received yet.</p>';
+}
+$('refreshEnquiries').addEventListener('click',loadEnquiries);
+</script>
+</body>
+</html>

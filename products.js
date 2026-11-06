@@ -1,60 +1,136 @@
-// STEVE TILES - PRODUCT COLLECTIONS
 
 const products = [
     {
         id: "ST001",
-        name: "Calacatta Beige",
-        categories: ["floor", "wall"],
+        name: "Botein Mink Marble",
+        categories: ["floor", "wall", "bathroom"],
         type: "Marble Look",
-        size: "600 × 1200 mm",
-        finish: "Glossy",
-        material: "Vitrified",
-        image: "https://www.artwalktile.com/images/OhU6Nm/c50a_1000w/IM.MU.BGY.2424.MT.jpg",
-        description: "A beige and grey marble-look design for elegant floors and walls. Its soft veining gives spaces a refined appearance."
-    },
-    {
-        id: "ST002",
-        name: "Urban Grey Stone",
-        categories: ["floor", "bathroom", "outdoor"],
-        type: "Stone Look",
         size: "600 × 600 mm",
         finish: "Matte",
         material: "Porcelain",
-        image: "https://03.cdn37.se/eOD/images/2.404077/klinker-tenfors-pulpis-mid-grey-marmor-matt-60x60-cm.jpeg",
-        description: "A modern grey stone-look surface suitable for contemporary interiors and selected outdoor applications."
+        image: "images/tiles/Botein Mink Marble.jpeg",
+        description: "Beige and grey marble-look porcelain tile."
     },
     {
-        id: "ST003",
-        name: "Muse Beige",
-        categories: ["floor", "wall", "kitchen"],
+        id: "ST002",
+        name: "Les Bijoux Beige",
+        categories: ["floor", "wall"],
         type: "Marble Look",
         size: "800 × 1600 mm",
         finish: "Polished",
         material: "Porcelain",
-        image: "https://www.banyo.pl/hpeciai/7fb500629198d312c208411a64f1292b/pol_pl_Imola-Ceramica-Muse-Beige-Grigio-120-x-120-cm-plytka-gresowa-naturalna-mat-MACCHIAAP-1BGLP-38459_1.webp",
-        description: "A warm beige and grey stone-inspired design for customers looking for a subtle premium finish."
+        image: "images/tiles/Les Bijoux Beige.jpeg",
+        description: "Premium marble-inspired tile with natural veining."
     },
     {
-        id: "ST004",
-        name: "River Beige",
-        categories: ["floor", "bathroom", "kitchen"],
-        type: "Natural Stone Look",
-        size: "600 × 600 mm",
-        finish: "Matte",
-        material: "Porcelain",
-        image: "https://a.allegroimg.com/original/116c3f/98444e8a4537953ce166158e96e1/TaniGres-Plytki-Gres-Marmurek-Kamien-RIVER-BEIGE-REKT-MATT-60X60-GAT-1",
-        description: "A neutral beige stone-look design that can complement a range of home interiors."
-    },
-    {
-        id: "ST005",
-        name: "Verona Grey",
-        categories: ["floor", "bathroom", "outdoor"],
+        id: "ST003",
+        name: "Taj Mahal Grey",
+        categories: ["floor", "bathroom"],
         type: "Stone Look",
         size: "600 × 600 mm",
         finish: "Matte",
         material: "Porcelain",
-        image: "https://www.nationaltiles.com.au/media/catalog/product/n/t/nt19-2905fl-macro.jpg?bg-color=&optimize=medium",
-        description: "A soft grey stone-look tile with a matte surface for a simple and contemporary appearance."
+        image: "images/tiles/Taj Mahal Grey.jpeg",
+        description: "Soft grey and beige natural stone-inspired surface."
+    },
+    {
+        id: "ST004",
+        name: "Opal Yamuna",
+        categories: ["floor", "wall", "kitchen"],
+        type: "Marble Look",
+        size: "600 × 1200 mm",
+        finish: "Polished",
+        material: "Porcelain",
+        image: "images/tiles/Opal Yamuna.jpeg",
+        description: "Elegant beige surface with soft natural veining."
+    },
+    {
+        id: "ST005",
+        name: "Amico Light",
+        categories: ["floor", "wall", "kitchen"],
+        type: "Marble Look",
+        size: "600 × 1200 mm",
+        finish: "Glossy",
+        material: "Porcelain",
+        image: "images/tiles/Amico Light.jpeg",
+        description: "Glossy beige-grey marble-look porcelain tile."
+    },
+    {
+        id: "ST006",
+        name: "Avalon White",
+        categories: ["floor", "wall", "bathroom"],
+        type: "Marble Look",
+        size: "600 × 1200 mm",
+        finish: "Polished",
+        material: "Porcelain",
+        image: "images/tiles/Avalon White.jpeg",
+        description: "White marble-inspired tile with grey veining."
+    },
+    {
+        id: "ST007",
+        name: "Liquorice Dark Grey",
+        categories: ["floor", "wall", "outdoor"],
+        type: "Concrete Look",
+        size: "600 × 600 mm",
+        finish: "Matte",
+        material: "Porcelain",
+        image: "images/tiles/Liquorice Dark Grey.jpeg",
+        description: "Deep charcoal grey surface with a subtle texture."
+    },
+    {
+        id: "ST008",
+        name: "Blue Lagoon",
+        categories: ["wall", "bathroom", "kitchen"],
+        type: "Decorative",
+        size: "600 × 600 mm",
+        finish: "Glossy",
+        material: "Ceramic",
+        image: "images/tiles/Blue Lagoon.jpeg",
+        description: "Blue-green decorative ceramic wall tile."
+    },
+    {
+        id: "ST009",
+        name: "Blanc Calacatta",
+        categories: ["floor", "wall", "bathroom"],
+        type: "Marble Look",
+        size: "600 × 1200 mm",
+        finish: "Matte",
+        material: "Porcelain",
+        image: "images/tiles/Blanc Calacatta.jpeg",
+        description: "White marble-look porcelain tile with bold grey veining."
+    },
+    {
+        id: "ST010",
+        name: "Ergon Dark Grey",
+        categories: ["floor", "outdoor"],
+        type: "Concrete Look",
+        size: "600 × 600 mm",
+        finish: "Matte",
+        material: "Porcelain",
+        image: "images/tiles/Ergon Dark Grey.jpeg",
+        description: "Dark grey concrete-inspired porcelain tile."
+    },
+    {
+        id: "ST011",
+        name: "Marza Aqua",
+        categories: ["wall", "kitchen", "bathroom"],
+        type: "Subway",
+        size: "600 × 1200 mm",
+        finish: "Glossy",
+        material: "Ceramic",
+        image: "images/tiles/Marza Aqua.jpeg",
+        description: "Blue-green glossy subway tiles for feature walls."
+    },
+    {
+        id: "ST012",
+        name: "Nilo Decorative",
+        categories: ["wall", "bathroom"],
+        type: "Decorative",
+        size: "600 × 600 mm",
+        finish: "Glossy",
+        material: "Ceramic",
+        image: "images/tiles/Nilo Decorative.jpeg",
+        description: "Decorative teal ceramic tile with a raised pattern."
     }
 ];
 
@@ -66,6 +142,8 @@ const categoryNames = {
     outdoor: "Outdoor Tiles"
 };
 
+// HTML ELEMENTS
+
 const productGrid = document.getElementById("productGrid");
 const productCount = document.getElementById("productCount");
 const searchInput = document.getElementById("catalogSearch");
@@ -76,20 +154,16 @@ const emptyProducts = document.getElementById("emptyProducts");
 
 const productDialog = document.getElementById("productDialog");
 const productDetails = document.getElementById("productDetails");
-
 const enquiryDialog = document.getElementById("enquiryDialog");
 const enquiryForm = document.getElementById("productEnquiryForm");
 
 let activeCategory = "all";
 
-
-// Read category and search text from the homepage URL.
+// URL PARAMETERS
 
 const pageParams = new URLSearchParams(window.location.search);
-
 const initialCategory = pageParams.get("category") || "";
 const initialSearch = pageParams.get("q") || "";
-
 
 function getCategoryFromURL(value) {
     const text = value.toLowerCase();
@@ -103,14 +177,12 @@ function getCategoryFromURL(value) {
     return "all";
 }
 
-
-// Display product cards.
+// DISPLAY PRODUCTS
 
 function displayProducts(list) {
     productGrid.innerHTML = "";
 
     list.forEach(function(product) {
-
         const categoryText = categoryNames[product.categories[0]];
 
         const card = document.createElement("article");
@@ -120,13 +192,12 @@ function displayProducts(list) {
             <div class="tile-image-wrap">
                 <img
                     src="${product.image}"
-                    alt="${product.name} tile design"
+                    alt="${product.name} tile sample"
                     loading="lazy"
                 >
             </div>
 
             <div class="tile-card-content">
-
                 <span class="tile-category">${categoryText}</span>
 
                 <h3>${product.name}</h3>
@@ -154,7 +225,6 @@ function displayProducts(list) {
                         Enquire Now
                     </button>
                 </div>
-
             </div>
         `;
 
@@ -162,8 +232,8 @@ function displayProducts(list) {
 
         image.addEventListener("error", function() {
             this.style.display = "none";
-            this.parentElement.style.background =
-                "linear-gradient(135deg, #e9e2d6, #c9bba4)";
+            this.parentElement.innerHTML =
+                '<span class="image-fallback">Image unavailable</span>';
         });
 
         productGrid.appendChild(card);
@@ -176,11 +246,9 @@ function displayProducts(list) {
     productGrid.hidden = list.length === 0;
 }
 
-
-// Apply category, search and other filters.
+// FILTER PRODUCTS
 
 function filterProducts() {
-
     let filtered = [...products];
 
     if (activeCategory !== "all") {
@@ -209,69 +277,54 @@ function filterProducts() {
         });
     }
 
-    const selectedSize = sizeFilter.value;
-
-    if (selectedSize !== "all") {
+    if (sizeFilter.value !== "all") {
         filtered = filtered.filter(function(product) {
-            return product.size === selectedSize;
+            return product.size === sizeFilter.value;
         });
     }
 
-    const selectedFinish = finishFilter.value;
-
-    if (selectedFinish !== "all") {
+    if (finishFilter.value !== "all") {
         filtered = filtered.filter(function(product) {
-            return product.finish === selectedFinish;
+            return product.finish === finishFilter.value;
         });
     }
 
     if (sortFilter.value === "az") {
-        filtered.sort(function(a, b) {
-            return a.name.localeCompare(b.name);
-        });
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     if (sortFilter.value === "za") {
-        filtered.sort(function(a, b) {
-            return b.name.localeCompare(a.name);
-        });
+        filtered.sort((a, b) => b.name.localeCompare(a.name));
     }
 
     displayProducts(filtered);
 }
 
-
-// Category buttons.
+// CATEGORY BUTTONS
 
 document.querySelectorAll(".category-filter").forEach(function(button) {
-
     button.addEventListener("click", function() {
-
         document.querySelectorAll(".category-filter").forEach(function(item) {
             item.classList.remove("active");
         });
 
         button.classList.add("active");
-
         activeCategory = button.dataset.category;
 
         filterProducts();
     });
 });
 
-
-// Search and filter events.
+// SEARCH AND FILTER EVENTS
 
 searchInput.addEventListener("input", filterProducts);
 sizeFilter.addEventListener("change", filterProducts);
 finishFilter.addEventListener("change", filterProducts);
 sortFilter.addEventListener("change", filterProducts);
 
-
-// Product details popup.
+// PRODUCT DETAILS
 
 function openProductDetails(product) {
-
     productDetails.innerHTML = `
         <img
             class="dialog-product-image"
@@ -285,8 +338,9 @@ function openProductDetails(product) {
 
         <p>${product.description}</p>
 
-        <p><strong>Category:</strong>
-            ${product.categories.map(category => categoryNames[category]).join(", ")}
+        <p>
+            <strong>Category:</strong>
+            ${product.categories.map(c => categoryNames[c]).join(", ")}
         </p>
 
         <p><strong>Tile Type:</strong> ${product.type}</p>
@@ -300,6 +354,10 @@ function openProductDetails(product) {
         </button>
     `;
 
+    productDetails.querySelector("img").addEventListener("error", function() {
+        this.style.display = "none";
+    });
+
     productDialog.showModal();
 
     document.getElementById("detailsEnquire").addEventListener("click", function() {
@@ -308,11 +366,9 @@ function openProductDetails(product) {
     });
 }
 
-
-// Open enquiry popup.
+// ENQUIRY POPUP
 
 function openEnquiry(product) {
-
     enquiryForm.reset();
 
     document.getElementById("enquiryProduct").value = product.id;
@@ -325,18 +381,14 @@ function openEnquiry(product) {
     enquiryDialog.showModal();
 }
 
-
-// Product card button events.
+// PRODUCT BUTTON EVENTS
 
 productGrid.addEventListener("click", function(event) {
-
     const button = event.target.closest("button[data-action]");
 
     if (!button) return;
 
-    const product = products.find(function(item) {
-        return item.id === button.dataset.id;
-    });
+    const product = products.find(item => item.id === button.dataset.id);
 
     if (!product) return;
 
@@ -349,8 +401,7 @@ productGrid.addEventListener("click", function(event) {
     }
 });
 
-
-// Close popups.
+// CLOSE POPUPS
 
 document.getElementById("closeProductDialog").addEventListener("click", function() {
     productDialog.close();
@@ -360,27 +411,32 @@ document.getElementById("closeEnquiryDialog").addEventListener("click", function
     enquiryDialog.close();
 });
 
-
-// Save enquiries in this browser.
+// SAVE ENQUIRIES
 
 enquiryForm.addEventListener("submit", function(event) {
-
     event.preventDefault();
 
     const productId = document.getElementById("enquiryProduct").value;
+
     const selectedProduct = products.find(item => item.id === productId);
 
     const enquiry = {
         id: Date.now(),
+
         name: document.getElementById("enquiryName").value.trim(),
         email: document.getElementById("enquiryEmail").value.trim(),
         phone: document.getElementById("enquiryPhone").value.trim(),
+
         category: selectedProduct
             ? categoryNames[selectedProduct.categories[0]]
             : "General Enquiry",
+
         message: document.getElementById("enquiryMessage").value.trim(),
+
         product: selectedProduct ? selectedProduct.name : "",
+
         status: "New",
+
         date: new Date().toLocaleString()
     };
 
@@ -401,17 +457,16 @@ enquiryForm.addEventListener("submit", function(event) {
         enquiryForm.reset();
 
     } catch (error) {
-        alert("Unable to save this enquiry in your browser. Please try again.");
-        console.error("Enquiry save error:", error);
+        alert("Unable to save this enquiry. Please try again.");
+        console.error(error);
     }
 });
 
-
-// Reset all filters.
+// RESET FILTERS
 
 document.getElementById("resetFilters").addEventListener("click", function() {
-
     activeCategory = "all";
+
     searchInput.value = "";
     sizeFilter.value = "all";
     finishFilter.value = "all";
@@ -427,8 +482,7 @@ document.getElementById("resetFilters").addEventListener("click", function() {
     filterProducts();
 });
 
-
-// Initial page setup.
+// INITIAL PAGE SETUP
 
 searchInput.value = initialSearch;
 activeCategory = getCategoryFromURL(initialCategory);
