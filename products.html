@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tile Collections | Steve Tiles</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="products.css">
+</head>
+
+<body class="catalog-body">
+
+    <header class="catalog-header">
+        <a href="index.html" class="catalog-logo">
+            STEVE <span>TILES.</span>
+        </a>
+
+        <nav class="catalog-nav">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#about">About Us</a>
+            <a href="products.html" class="active">Collections</a>
+            <a href="index.html#gallery">Gallery</a>
+            <a href="index.html#contact" class="catalog-nav-button">Contact Us</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="catalog-hero">
+            <div class="catalog-hero-content">
+                <p class="catalog-eyebrow">EXPLORE OUR COLLECTION</p>
+                <h1>Find the Perfect Tiles for Your Space</h1>
+                <p>
+                    Explore different designs, colours, sizes and finishes
+                    for your home and commercial spaces.
+                </p>
+                <a href="#all-products" class="catalog-hero-button">
+                    Explore Tiles
+                </a>
+            </div>
+        </section>
+
+        <section class="catalog-intro">
+            <p class="catalog-eyebrow">OUR COLLECTIONS</p>
+            <h2>Discover Our Tile Designs</h2>
+            <p>
+                Browse our tile collections and find designs that match
+                your style and requirements.
+            </p>
+        </section>
+
+        <section class="catalog-section" id="all-products">
+
+            <aside class="catalog-sidebar">
+                <h3>Categories</h3>
+
+                <button class="category-filter active" data-category="all">
+                    All Tiles
+                </button>
+
+                <button class="category-filter" data-category="floor">
+                    Floor Tiles
+                </button>
+
+                <button class="category-filter" data-category="wall">
+                    Wall Tiles
+                </button>
+
+                <button class="category-filter" data-category="bathroom">
+                    Bathroom Tiles
+                </button>
+
+                <button class="category-filter" data-category="kitchen">
+                    Kitchen Tiles
+                </button>
+
+                <button class="category-filter" data-category="outdoor">
+                    Outdoor Tiles
+                </button>
+
+                <div class="sidebar-note">
+                    <strong>Need help choosing?</strong>
+                    <p>Contact our team for assistance with your tile selection.</p>
+                    <a href="index.html#contact">Make an enquiry →</a>
+                </div>
+            </aside>
+
+            <div class="catalog-main">
+
+                <div class="catalog-toolbar">
+                    <div>
+                        <h2>Our Tile Collection</h2>
+                        <p id="productCount">Loading collections...</p>
+                    </div>
+
+                    <input
+                        type="search"
+                        id="catalogSearch"
+                        placeholder="Search tile designs..."
+                        aria-label="Search tile designs"
+                    >
+                </div>
+
+                <div class="catalog-filters">
+
+                    <select id="sizeFilter">
+                        <option value="all">All Sizes</option>
+                        <option value="600 × 600 mm">600 × 600 mm</option>
+                        <option value="600 × 1200 mm">600 × 1200 mm</option>
+                        <option value="800 × 1600 mm">800 × 1600 mm</option>
+                    </select>
+
+                    <select id="finishFilter">
+                        <option value="all">All Finishes</option>
+                        <option value="Glossy">Glossy</option>
+                        <option value="Matte">Matte</option>
+                        <option value="Polished">Polished</option>
+                    </select>
+
+                    <select id="sortFilter">
+                        <option value="featured">Sort: Featured</option>
+                        <option value="az">Name: A to Z</option>
+                        <option value="za">Name: Z to A</option>
+                    </select>
+
+                </div>
+
+                <div class="product-grid" id="productGrid"></div>
+
+                <div class="empty-products" id="emptyProducts" hidden>
+                    <h3>No tiles found</h3>
+                    <p>Try changing your search or filters.</p>
+                    <button id="resetFilters">Clear Filters</button>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="catalog-help">
+            <div>
+                <p class="catalog-eyebrow">LET'S PLAN YOUR SPACE</p>
+                <h2>Looking for a specific tile design?</h2>
+                <p>
+                    Send us your requirements and our team can help you
+                    explore suitable options.
+                </p>
+            </div>
+
+            <a href="index.html#contact">Contact Steve Tiles</a>
+        </section>
+
+    </main>
+
+    <footer class="catalog-footer">
+        <a href="index.html" class="catalog-logo">
+            STEVE <span>TILES.</span>
+        </a>
+        <p>Explore designs. Create beautiful spaces.</p>
+        <p>© 2026 Steve Tiles. All Rights Reserved.</p>
+    </footer>
+
+
+    <!-- Product Details Popup -->
+    <dialog id="productDialog" class="catalog-dialog">
+        <div class="dialog-content">
+            <button class="dialog-close" id="closeProductDialog"
+                aria-label="Close">&times;</button>
+            <div id="productDetails"></div>
+        </div>
+    </dialog>
+
+
+    <!-- Enquiry Popup -->
+    <dialog id="enquiryDialog" class="catalog-dialog">
+        <div class="dialog-content enquiry-content">
+            <button class="dialog-close" id="closeEnquiryDialog"
+                aria-label="Close">&times;</button>
+
+            <p class="catalog-eyebrow">PRODUCT ENQUIRY</p>
+            <h2>Interested in this tile?</h2>
+            <p class="enquiry-description">
+                Share your details and requirements with us.
+            </p>
+
+            <form id="productEnquiryForm">
+
+                <input type="hidden" id="enquiryProduct">
+
+                <label for="enquiryName">Your Name</label>
+                <input type="text" id="enquiryName"
+                    placeholder="Enter your name" required>
+
+                <label for="enquiryEmail">Email Address</label>
+                <input type="email" id="enquiryEmail"
+                    placeholder="Enter your email" required>
+
+                <label for="enquiryPhone">Phone Number</label>
+                <input type="tel" id="enquiryPhone"
+                    placeholder="Enter your phone number" required>
+
+                <label for="enquiryMessage">Your Requirement</label>
+                <textarea id="enquiryMessage"
+                    placeholder="Tell us what you are looking for..."
+                    rows="4" required></textarea>
+
+                <button type="submit" class="enquiry-submit">
+                    Submit Enquiry
+                </button>
+
+                <p id="enquirySuccess" class="enquiry-success" hidden>
+                    Your enquiry has been saved successfully.
+                </p>
+
+            </form>
+        </div>
+    </dialog>
+
+    <script src="products.js"></script>
+</body>
+</html>
