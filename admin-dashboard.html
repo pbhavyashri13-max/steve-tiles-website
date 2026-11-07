@@ -268,8 +268,16 @@ const $ = id => document.getElementById(id);
 function showApp(){
     $('loginScreen').style.display='none';
     $('adminApp').style.display='block';
-    $('todayDate').textContent=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-    renderProducts();renderCategories();loadEnquiries();
+
+    $('todayDate').textContent = new Date().toLocaleDateString('en-IN',{
+        day:'numeric',
+        month:'long',
+        year:'numeric'
+    });
+
+    loadAdminProducts();
+    renderCategories();
+    loadEnquiries();
 }
 $('loginForm').addEventListener('submit',function(e){
     e.preventDefault();
@@ -295,25 +303,93 @@ document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',(
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.go)));
 $('mobileMenu').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
 
-let adminProducts=JSON.parse(localStorage.getItem('steveAdminProducts')||'[]');
-let adminCategories=JSON.parse(localStorage.getItem('steveAdminCategories')||'["Floor","Wall","Bathroom","Kitchen","Outdoor"]');
+let adminProducts = [];
+let adminCategories = ["Floor", "Wall", "Bathroom", "Kitchen", "Outdoor"];
 
-$('productForm').addEventListener('submit',e=>{
+async function loadAdminProducts() {
+    try {
+        const response = await fetch("http://127.0.0.1:5000/api/products");
+        const data = await response.json();
+
+        if (!response.ok || data.status !== "success") {
+            throw new Error(data.message || "Unable to load products");
+        }
+
+        adminProducts = data.products;
+        renderProducts();
+
+    } catch (error) {
+        console.error("Product loading error:", error);
+        alert("Could not load products. Please check whether the backend is running.");
+    }
+}
+$('productForm').addEventListener('submit', async e => {
     e.preventDefault();
-    adminProducts.push({
-        name:$('pName').value,code:$('pCode').value,
-        category:$('pCategory').value,price:$('pPrice').value,
-        size:$('pSize').value,finish:$('pFinish').value
-    });
-    localStorage.setItem('steveAdminProducts',JSON.stringify(adminProducts));
-    e.target.reset();renderProducts();
-    alert('Product saved in this browser.');
+
+    const productData = {
+        name: $('pName').value.trim(),
+        code: $('pCode').value.trim(),
+        category: $('pCategory').value.toLowerCase(),
+        price: $('pPrice').value || null,
+        size: $('pSize').value.trim(),
+        finish: $('pFinish').value.trim()
+    };
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || 'Unable to save product');
+        }
+
+        alert('Product added successfully to MySQL!');
+
+        e.target.reset();
+
+        await loadAdminProducts();
+
+    } catch (error) {
+        alert('Error: ' + error.message);
+        console.error(error);
+    }
 });
 function renderProducts(){
-    $('productCount').textContent=12+adminProducts.length;
-    if(!adminProducts.length){$('productTable').innerHTML='<p class="empty">No additional products added yet.</p>';return;}
-    $('productTable').innerHTML='<table><thead><tr><th>Product</th><th>Code</th><th>Category</th><th>Price</th><th>Action</th></tr></thead><tbody>'+
-    adminProducts.map((p,i)=>`<tr><td>${safe(p.name)}</td><td>${safe(p.code)}</td><td>${safe(p.category)}</td><td>${p.price?'₹'+safe(p.price):'—'}</td><td><button class="danger" onclick="deleteProduct(${i})">Delete</button></td></tr>`).join('')+
+
+    $('productCount').textContent = adminProducts.length;
+
+    if(!adminProducts.length){
+        $('productTable').innerHTML =
+            '<p class="empty">No products found.</p>';
+        return;
+    }
+
+    $('productTable').innerHTML =
+    '<table><thead><tr>' +
+    '<th>Product</th>' +
+    '<th>Code</th>' +
+    '<th>Category</th>' +
+    '<th>Size</th>' +
+    '<th>Finish</th>' +
+    '</tr></thead><tbody>' +
+
+    adminProducts.map(p => `
+        <tr>
+            <td>${safe(p.name)}</td>
+            <td>${safe(p.code)}</td>
+            <td>${safe((p.categories || []).join(', '))}</td>
+            <td>${safe(p.size || '—')}</td>
+            <td>${safe(p.finish || '—')}</td>
+        </tr>
+    `).join('') +
+
     '</tbody></table>';
 }
 function deleteProduct(i){
