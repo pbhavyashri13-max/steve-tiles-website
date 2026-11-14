@@ -3,11 +3,11 @@ import os
 import mysql.connector
 from dotenv import load_dotenv
 
-# Always load the .env file from the backend folder
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ENV_FILE = os.path.join(BASE_DIR, ".env")
 
-load_dotenv(dotenv_path=ENV_FILE, override=True)
+# Keep Render environment variables as the priority
+load_dotenv(dotenv_path=ENV_FILE, override=False)
 
 
 def get_db_connection():
@@ -16,11 +16,11 @@ def get_db_connection():
     db_user = os.getenv("DB_USER")
     db_password = os.getenv("DB_PASSWORD")
     db_name = os.getenv("DB_NAME")
+    db_port = int(os.getenv("DB_PORT", "4000"))
 
     if not all([db_host, db_user, db_password, db_name]):
         raise ValueError(
-            "Database configuration is incomplete. "
-            "Please check the backend .env file."
+            "Database configuration is incomplete."
         )
 
     connection = mysql.connector.connect(
@@ -28,7 +28,10 @@ def get_db_connection():
         user=db_user,
         password=db_password,
         database=db_name,
-        port=3306
+        port=db_port,
+        ssl_ca="/etc/secrets/isrgrootx1.pem",
+        ssl_verify_cert=True,
+        ssl_verify_identity=True
     )
 
     return connection
