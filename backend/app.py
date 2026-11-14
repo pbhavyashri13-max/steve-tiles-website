@@ -1468,7 +1468,7 @@ def get_gallery():
 
         for item in images:
             item["image"] = (
-                "http://127.0.0.1:5000/"
+               "https://steve-tiles-website-1.onrender.com/"
                 + item["image"].lstrip("/")
             )
 
