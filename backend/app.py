@@ -17,17 +17,19 @@ if not app.secret_key:
 
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE="Lax",
-    SESSION_COOKIE_SECURE=False,
+    SESSION_COOKIE_SAMESITE="None",
+    SESSION_COOKIE_SECURE=True,
     PERMANENT_SESSION_LIFETIME=3600
 )
+
 CORS(
     app,
     resources={
-       r"/api/.*": {
+        r"/api/.*": {
             "origins": [
                 "http://127.0.0.1:5500",
-                "http://localhost:5500"
+                "http://localhost:5500",
+                "https://steve-tiles-website-backend.vercel.app"
             ],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type"]
@@ -35,6 +37,7 @@ CORS(
     },
     supports_credentials=True
 )
+
 
 # ================= ADMIN AUTHENTICATION =================
 
