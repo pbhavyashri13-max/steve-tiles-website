@@ -1105,8 +1105,7 @@ tbody tr:hover {background:#fcfbf8}
    STEVE TILES ADMIN DASHBOARD
 ========================================= */
 
-const API = "http://127.0.0.1:5000";
-
+const API = "https://steve-tiles-website-1.onrender.com"
 let products = [];
 let categories = [];
 let editingProductCode = null;
@@ -1896,8 +1895,10 @@ function renderImages() {
     }
 
     grid.innerHTML = filteredProducts.map(product => {
-        const imagePath =
-            `http://127.0.0.1:5000/catalogue-images/${product.code}.jpg`;
+        
+
+const imagePath =
+    `https://steve-tiles-website-1.onrender.com/catalogue-images/${product.code}.jpg`;
 
         return `
             <div class="image-management-card">
@@ -2006,7 +2007,7 @@ document.addEventListener("keydown", function(e) {
 // STEVE TILES - PERMANENT GALLERY MANAGEMENT
 // =============================================
 
-const GALLERY_API = "http://127.0.0.1:5000";
+const GALLERY_API = "https://steve-tiles-website-1.onrender.com"
 
 let gallerySelectedFiles = [];
 let galleryPreviewURLs = [];
@@ -2550,7 +2551,7 @@ Object.keys(extraSettingFields).forEach(id => {
 });
 async function adminLogout() {
     try {
-        await fetch("http://127.0.0.1:5000/api/admin/logout", {
+        await fetch("http://https://steve-tiles-website-1.onrender.com/api/admin/logout", {
             method: "POST",
             credentials: "include"
         });
