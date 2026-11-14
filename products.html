@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore premium floor, wall, bathroom and kitchen tile collections at Steve Tiles.">
+    <meta name="description" content="Explore 25 premium tile designs at Steve Tiles.">
 
     <title>Tile Collections | Steve Tiles</title>
 
@@ -14,375 +14,241 @@
 
 <body class="catalog-body">
 
-    <!-- HEADER - SAME DESIGN AS HOMEPAGE -->
-    <header class="header">
-        <div class="container navbar">
+<header class="header">
+    <div class="container navbar">
 
-            <a href="index.html" class="logo">
-                STEVE <span>TILES.</span>
-            </a>
-
-            <button class="menu-toggle" id="menuToggle"
-                    aria-label="Open navigation" aria-expanded="false">
-                ☰
-            </button>
-
-            <nav class="nav-links" id="navLinks">
-                <a href="index.html#home">Home</a>
-                <a href="index.html#about">About Us</a>
-                <a href="products.html" class="active">Collections</a>
-                <a href="index.html#gallery">Gallery</a>
-                <a href="index.html#contact">Contact</a>
-            </nav>
-
-            <a href="index.html#contact" class="header-button">
-                Enquire Now <span>↗</span>
-            </a>
-
-        </div>
-    </header>
-
-
-    <main>
-
-        <!-- COLLECTION HERO -->
-        <section class="catalog-hero">
-            <div class="catalog-hero-content">
-
-                <p class="catalog-eyebrow">
-                    EXPLORE OUR COLLECTION
-                </p>
-
-                <h1>Find the Perfect Tiles for Your Space</h1>
-
-                <p>
-                    Explore different designs, colours, sizes and finishes
-                    for your home and commercial spaces.
-                </p>
-
-                <a href="#all-products" class="catalog-hero-button">
-                    Explore Tiles
-                </a>
-
-            </div>
-        </section>
-
-
-        <!-- COLLECTION INTRO -->
-        <section class="catalog-intro">
-
-            <p class="catalog-eyebrow">OUR COLLECTIONS</p>
-
-            <h2>Discover Our Tile Designs</h2>
-
-            <p>
-                Browse our tile collections and find designs that match
-                your style and requirements.
-            </p>
-
-        </section>
-
-
-        <!-- PRODUCTS SECTION -->
-        <section class="catalog-section" id="all-products">
-
-            <!-- CATEGORY SIDEBAR -->
-            <aside class="catalog-sidebar">
-
-                <h3>Categories</h3>
-
-                <button class="category-filter active" data-category="all">
-                    All Tiles
-                </button>
-
-                <button class="category-filter" data-category="floor">
-                    Floor Tiles
-                </button>
-
-                <button class="category-filter" data-category="wall">
-                    Wall Tiles
-                </button>
-
-                <button class="category-filter" data-category="bathroom">
-                    Bathroom Tiles
-                </button>
-
-                <button class="category-filter" data-category="kitchen">
-                    Kitchen Tiles
-                </button>
-
-                <button class="category-filter" data-category="outdoor">
-                    Outdoor Tiles
-                </button>
-
-                <div class="sidebar-note">
-
-                    <strong>Need help choosing?</strong>
-
-                    <p>
-                        Contact our team for assistance with your tile selection.
-                    </p>
-
-                    <a href="index.html#contact">
-                        Make an enquiry →
-                    </a>
-
-                </div>
-
-            </aside>
-
-
-            <!-- PRODUCT LIST -->
-            <div class="catalog-main">
-
-                <div class="catalog-toolbar">
-
-                    <div>
-                        <h2>Our Tile Collection</h2>
-                        <p id="productCount">Loading collections...</p>
-                    </div>
-
-                    <input
-                        type="search"
-                        id="catalogSearch"
-                        placeholder="Search tile designs..."
-                        aria-label="Search tile designs"
-                    >
-
-                </div>
-
-
-                <!-- PRODUCT FILTERS -->
-                <div class="catalog-filters">
-
-                    <select id="sizeFilter">
-                        <option value="all">All Sizes</option>
-                        <option value="600 × 600 mm">600 × 600 mm</option>
-                        <option value="600 × 1200 mm">600 × 1200 mm</option>
-                        <option value="800 × 1600 mm">800 × 1600 mm</option>
-                    </select>
-
-                    <select id="finishFilter">
-                        <option value="all">All Finishes</option>
-                        <option value="Glossy">Glossy</option>
-                        <option value="Matte">Matte</option>
-                        <option value="Polished">Polished</option>
-                    </select>
-
-                    <select id="sortFilter">
-                        <option value="featured">Sort: Featured</option>
-                        <option value="az">Name: A to Z</option>
-                        <option value="za">Name: Z to A</option>
-                    </select>
-
-                </div>
-
-
-                <!-- PRODUCTS WILL LOAD HERE -->
-                <div class="product-grid" id="productGrid"></div>
-
-
-                <!-- NO PRODUCTS MESSAGE -->
-                <div class="empty-products" id="emptyProducts" hidden>
-
-                    <h3>No tiles found</h3>
-
-                    <p>Try changing your search or filters.</p>
-
-                    <button id="resetFilters">
-                        Clear Filters
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- CONTACT BANNER -->
-        <section class="catalog-help">
-
-            <div>
-
-                <p class="catalog-eyebrow">
-                    LET'S PLAN YOUR SPACE
-                </p>
-
-                <h2>Looking for a specific tile design?</h2>
-
-                <p>
-                    Send us your requirements and our team can help you
-                    explore suitable options.
-                </p>
-
-            </div>
-
-            <a href="index.html#contact">
-                Contact Steve Tiles
-            </a>
-
-        </section>
-
-    </main>
-
-
-    <!-- FOOTER -->
-    <footer class="catalog-footer">
-
-        <a href="index.html" class="catalog-logo">
+        <a href="index.html" class="logo">
             STEVE <span>TILES.</span>
         </a>
 
-        <p>Explore designs. Create beautiful spaces.</p>
+        <button class="menu-toggle" id="menuToggle"
+                aria-label="Open navigation" aria-expanded="false">
+            ☰
+        </button>
 
-        <p>© 2026 Steve Tiles. All Rights Reserved.</p>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#about">About Us</a>
+            <a href="products.html" class="active">Collections</a>
+            <a href="index.html#gallery">Gallery</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
 
-    </footer>
+        <a href="index.html#contact" class="header-button">
+            Enquire Now <span>↗</span>
+        </a>
 
+    </div>
+</header>
 
-    <!-- PRODUCT DETAILS POPUP -->
-    <dialog id="productDialog" class="catalog-dialog">
+<main>
 
-        <div class="dialog-content">
-
-            <button
-                class="dialog-close"
-                id="closeProductDialog"
-                aria-label="Close">
-                &times;
-            </button>
-
-            <div id="productDetails"></div>
-
+    <section class="catalog-hero">
+        <div class="catalog-hero-content">
+            <p class="catalog-eyebrow">STEVE TILES COLLECTION</p>
+            <h1>Discover Tiles That Transform Your Space</h1>
+            <p>
+                Explore our collection of 25 carefully selected tile
+                designs for beautiful homes and commercial spaces.
+            </p>
+            <a href="#all-products" class="catalog-hero-button">
+                Explore All Tiles
+            </a>
         </div>
+    </section>
 
-    </dialog>
+    <section class="catalog-intro">
+        <p class="catalog-eyebrow">OUR COLLECTIONS</p>
+        <h2>Find Your Perfect Tile</h2>
+        <p>
+            From elegant marble finishes to modern decorative designs,
+            discover tiles that match your style.
+        </p>
+    </section>
 
+    <section class="catalog-section" id="all-products">
 
-    <!-- PRODUCT ENQUIRY POPUP -->
-    <dialog id="enquiryDialog" class="catalog-dialog">
+        <aside class="catalog-sidebar">
 
-        <div class="dialog-content enquiry-content">
+            <h3>Browse Categories</h3>
 
-            <button
-                class="dialog-close"
-                id="closeEnquiryDialog"
-                aria-label="Close">
-                &times;
+            <button class="category-filter active" data-category="all">
+                All Tiles <span>25</span>
             </button>
 
-            <p class="catalog-eyebrow">
-                PRODUCT ENQUIRY
-            </p>
+            <button class="category-filter" data-category="floor">
+                Floor Tiles
+            </button>
 
-            <h2>Interested in this tile?</h2>
+            <button class="category-filter" data-category="wall">
+                Wall Tiles
+            </button>
 
-            <p class="enquiry-description">
-                Share your details and requirements with us.
-            </p>
+            <button class="category-filter" data-category="bathroom">
+                Bathroom Tiles
+            </button>
 
+            <button class="category-filter" data-category="kitchen">
+                Kitchen Tiles
+            </button>
 
-            <form id="productEnquiryForm">
+            <button class="category-filter" data-category="outdoor">
+                Outdoor Tiles
+            </button>
 
-                <input type="hidden" id="enquiryProduct">
-
-
-                <label for="enquiryName">
-                    Your Name
-                </label>
-
-                <input
-                    type="text"
-                    id="enquiryName"
-                    placeholder="Enter your name"
-                    required
-                >
-
-
-                <label for="enquiryEmail">
-                    Email Address
-                </label>
-
-                <input
-                    type="email"
-                    id="enquiryEmail"
-                    placeholder="Enter your email"
-                    required
-                >
-
-
-                <label for="enquiryPhone">
-                    Phone Number
-                </label>
-
-                <input
-                    type="tel"
-                    id="enquiryPhone"
-                    placeholder="Enter your phone number"
-                    required
-                >
-
-
-                <label for="enquiryMessage">
-                    Your Requirement
-                </label>
-
-                <textarea
-                    id="enquiryMessage"
-                    placeholder="Tell us what you are looking for..."
-                    rows="4"
-                    required></textarea>
-
-
-                <button type="submit" class="enquiry-submit">
-                    Submit Enquiry
-                </button>
-
-
-                <p id="enquirySuccess" class="enquiry-success" hidden>
-                    Your enquiry has been saved successfully.
+            <div class="sidebar-note">
+                <strong>Need help choosing?</strong>
+                <p>
+                    Our team can help you find the right tile
+                    for your space.
                 </p>
+                <a href="index.html#contact">Make an enquiry →</a>
+            </div>
 
-            </form>
+        </aside>
+
+        <div class="catalog-main">
+
+            <div class="catalog-toolbar">
+                <div>
+                    <p class="catalog-eyebrow">EXPLORE OUR DESIGNS</p>
+                    <h2>All Tile Collections</h2>
+                    <p id="productCount">Loading collections...</p>
+                </div>
+
+                <input
+                    type="search"
+                    id="catalogSearch"
+                    placeholder="Search by name or code..."
+                    aria-label="Search tile designs">
+            </div>
+
+            <div class="catalog-filters">
+
+                <select id="sizeFilter">
+                    <option value="all">All Sizes</option>
+                </select>
+
+                <select id="finishFilter">
+                    <option value="all">All Finishes</option>
+                </select>
+
+                <select id="sortFilter">
+                    <option value="featured">Sort: Featured</option>
+                    <option value="az">Name: A to Z</option>
+                    <option value="za">Name: Z to A</option>
+                </select>
+
+            </div>
+
+            <div class="product-grid" id="productGrid"></div>
+
+            <div class="empty-products" id="emptyProducts" hidden>
+                <h3>No tiles found</h3>
+                <p>Try changing your search or filters.</p>
+                <button id="resetFilters">Clear Filters</button>
+            </div>
 
         </div>
 
-    </dialog>
+    </section>
 
+    <section class="catalog-help">
+        <div>
+            <p class="catalog-eyebrow">LET'S PLAN YOUR SPACE</p>
+            <h2>Looking for a specific tile design?</h2>
+            <p>
+                Contact our team for help with your tile selection
+                and requirements.
+            </p>
+        </div>
 
-    <!-- MOBILE NAVIGATION SCRIPT -->
-    <script>
-        const menuToggle = document.getElementById("menuToggle");
-        const navLinks = document.getElementById("navLinks");
+        <a href="index.html#contact">Contact Steve Tiles</a>
+    </section>
 
-        menuToggle.addEventListener("click", function () {
+</main>
 
-            navLinks.classList.toggle("active");
+<footer class="catalog-footer">
+    <a href="index.html" class="catalog-logo">
+        STEVE <span>TILES.</span>
+    </a>
+    <p>Explore designs. Create beautiful spaces.</p>
+    <p>© 2026 Steve Tiles. All Rights Reserved.</p>
+</footer>
 
-            const isOpen = navLinks.classList.contains("active");
+<dialog id="productDialog" class="catalog-dialog">
+    <div class="dialog-content">
+        <button class="dialog-close" id="closeProductDialog"
+                aria-label="Close">&times;</button>
+        <div id="productDetails"></div>
+    </div>
+</dialog>
 
-            menuToggle.setAttribute("aria-expanded", isOpen);
+<dialog id="enquiryDialog" class="catalog-dialog">
+    <div class="dialog-content enquiry-content">
 
+        <button class="dialog-close" id="closeEnquiryDialog"
+                aria-label="Close">&times;</button>
+
+        <p class="catalog-eyebrow">PRODUCT ENQUIRY</p>
+        <h2>Interested in this tile?</h2>
+        <p class="enquiry-description">
+            Share your details and requirements with us.
+        </p>
+
+        <form id="productEnquiryForm">
+
+            <input type="hidden" id="enquiryProduct">
+
+            <label for="enquiryName">Your Name</label>
+            <input type="text" id="enquiryName"
+                   placeholder="Enter your name" required>
+
+            <label for="enquiryEmail">Email Address</label>
+            <input type="email" id="enquiryEmail"
+                   placeholder="Enter your email" required>
+
+            <label for="enquiryPhone">Phone Number</label>
+            <input type="tel" id="enquiryPhone"
+                   placeholder="Enter your phone number" required>
+
+            <label for="enquiryMessage">Your Requirement</label>
+            <textarea id="enquiryMessage"
+                      placeholder="Tell us what you are looking for..."
+                      rows="4" required></textarea>
+
+            <button type="submit" class="enquiry-submit">
+                Submit Enquiry
+            </button>
+
+            <p id="enquirySuccess" class="enquiry-success" hidden>
+                Your enquiry has been saved successfully.
+            </p>
+
+        </form>
+    </div>
+</dialog>
+
+<script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+
+        const isOpen = navLinks.classList.contains("active");
+        menuToggle.setAttribute("aria-expanded", isOpen);
+    });
+
+    navLinks.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            navLinks.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
         });
+    });
+</script>
 
-        // Close mobile menu after clicking a link
-        navLinks.querySelectorAll("a").forEach(function (link) {
-
-            link.addEventListener("click", function () {
-
-                navLinks.classList.remove("active");
-
-                menuToggle.setAttribute("aria-expanded", "false");
-
-            });
-
-        });
-    </script>
-
-
-    <!-- PRODUCTS JAVASCRIPT -->
-    <script src="products.js"></script>
+<script src="products.js"></script>
 
 </body>
 </html>

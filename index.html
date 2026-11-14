@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,22 +8,252 @@
     <title>Steve Tiles | Explore Beautiful Spaces</title>
 
     <link rel="stylesheet" href="style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* PREMIUM GALLERY */
+        .gallery-slider {
+            width: 100%;
+        }
+
+        .gallery-slider-grid {
+            position: relative;
+            width: 100%;
+            min-height: 430px;
+            display: block !important;
+            overflow: hidden;
+            border-radius: 14px;
+            background: #f2f0ec;
+        }
+
+        .gallery-slide {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 480px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-slide.active {
+            display: block;
+            animation: galleryFade 0.7s ease;
+        }
+
+       
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    image-rendering: auto;
+    transition: transform 0.7s ease;
+}
+
+
+        .gallery-slide:hover img {
+            transform: scale(1.035);
+        }
+
+        .gallery-slide::after {
+            content: "";
+            position: absolute;
+            inset: 40% 0 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.65));
+            pointer-events: none;
+        }
+
+        .gallery-slide-caption {
+            position: absolute;
+            z-index: 2;
+            left: 35px;
+            bottom: 30px;
+            color: #fff;
+        }
+
+        .gallery-slide-caption span {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .gallery-slide-caption h3 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 500;
+        }
+
+        .gallery-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            margin-top: 22px;
+        }
+
+        .gallery-controls button {
+            min-width: 44px;
+            height: 44px;
+            padding: 0 14px;
+            border: 1px solid #d7d0c4;
+            border-radius: 50px;
+            background: #fff;
+            color: #333;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .gallery-controls button:hover {
+            background: #a78652;
+            color: #fff;
+            border-color: #a78652;
+        }
+
+        .gallery-controls button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .gallery-controls #galleryPlayPause {
+            min-width: 85px;
+        }
+
+        .gallery-slide-info {
+            width: 110px;
+            text-align: center;
+        }
+
+        #galleryCounter {
+            display: block;
+            margin-bottom: 7px;
+            color: #777;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .gallery-progress {
+            width: 100%;
+            height: 3px;
+            overflow: hidden;
+            background: #e4e0d8;
+        }
+
+        #galleryProgress {
+            width: 0%;
+            height: 100%;
+            background: #a78652;
+        }
+
+        .gallery-empty-message {
+            padding: 70px 20px;
+            text-align: center;
+            color: #777;
+        }
+
+        /* LIGHTBOX */
+        .gallery-lightbox {
+            position: fixed;
+            z-index: 99999;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: rgba(0,0,0,0.92);
+        }
+
+        .gallery-lightbox.open {
+            display: flex;
+        }
+
+        .gallery-lightbox img {
+            max-width: 92%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .gallery-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 38px;
+            cursor: pointer;
+        }
+
+        @keyframes galleryFade {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-slider-grid {
+                min-height: 300px;
+            }
+
+            .gallery-slide {
+                height: 340px;
+            }
+
+            .gallery-slide-caption {
+                left: 20px;
+                bottom: 22px;
+            }
+
+            .gallery-controls {
+                gap: 10px;
+            }
+
+            .gallery-controls button {
+                min-width: 38px;
+                height: 38px;
+                padding: 0 10px;
+            }
+
+            .gallery-controls #galleryPlayPause {
+                min-width: 72px;
+            }
+
+            .gallery-slide-info {
+                width: 75px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-slide {
+                height: 270px;
+            }
+
+            .gallery-controls {
+                gap: 7px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
     <div class="container navbar">
 
-        <a href="index.html" class="logo">
-            STEVE <span>TILES.</span>
-        </a>
+        <a href="index.html" class="logo">STEVE <span>TILES.</span></a>
 
         <button class="menu-toggle" id="menuToggle"
                 aria-label="Open navigation" aria-expanded="false">
@@ -35,7 +266,7 @@
             <a href="#collections">Collections</a>
             <a href="#gallery">Gallery</a>
             <a href="#contact">Contact</a>
-        </nav>
+<a href="admin-dashboard.html">Admin</a>        </nav>
 
         <a href="#contact" class="header-button">
             Enquire Now <span>↗</span>
@@ -46,7 +277,7 @@
 
 <main>
 
-<!-- HERO WITH AUTOMATIC SLIDESHOW -->
+<!-- HERO -->
 <section class="hero" id="home">
 
     <div class="hero-slides" aria-hidden="true">
@@ -72,6 +303,7 @@
         </p>
 
         <div class="hero-actions">
+
             <a href="#collections" class="btn btn-gold">
                 Explore Collections <span>↗</span>
             </a>
@@ -79,9 +311,11 @@
             <a href="#about" class="btn btn-outline">
                 Discover More
             </a>
+
         </div>
 
         <form class="hero-search" id="homeSearchForm">
+
             <span class="search-icon">⌕</span>
 
             <input
@@ -92,6 +326,7 @@
             >
 
             <button type="submit">Search</button>
+
         </form>
 
     </div>
@@ -109,6 +344,7 @@
     <div class="container about-grid">
 
         <div class="about-visual">
+
             <img
                 src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85"
                 alt="Elegant modern living room with premium flooring"
@@ -119,6 +355,7 @@
                 <span>INSPIRED BY DESIGN</span>
                 <strong>Beautiful Living Spaces</strong>
             </div>
+
         </div>
 
         <div class="about-content">
@@ -172,64 +409,72 @@
 
         <div class="category-grid">
 
-    <!-- FLOOR TILES: Living room -->
-    <a href="products.html?category=floor" class="category-card">
-        <img
-            src="https://ssl.cdn-redfin.com/photo/77/mbphotov3/992/genMid.226044992_0.jpg"
-            alt="Living room with large tiled flooring"
-            loading="lazy"
-        >
-        <div class="category-info">
-            <span>01 / COLLECTION</span>
-            <h3>Floor Tiles</h3>
-            <p>Explore Collection ↗</p>
+            <a href="products.html?category=floor" class="category-card">
+
+                <img
+                    src="https://ssl.cdn-redfin.com/photo/77/mbphotov3/992/genMid.226044992_0.jpg"
+                    alt="Living room with large tiled flooring"
+                    loading="lazy"
+                >
+
+                <div class="category-info">
+                    <span>01 / COLLECTION</span>
+                    <h3>Floor Tiles</h3>
+                    <p>Explore Collection ↗</p>
+                </div>
+
+            </a>
+
+            <a href="products.html?category=wall" class="category-card">
+
+                <img
+                    src="https://cdn11.bigcommerce.com/s-4990d/images/stencil/2560w/products/31035/49163/60-326_8x8_Form_Sand_Deco_Blend_Porcelain__Tile_Lifestyle_-_Copy__32688.1641303367.jpg?c=2"
+                    alt="Living room with decorative tiled feature wall"
+                    loading="lazy"
+                >
+
+                <div class="category-info">
+                    <span>02 / COLLECTION</span>
+                    <h3>Wall Tiles</h3>
+                    <p>Explore Collection ↗</p>
+                </div>
+
+            </a>
+
+            <a href="products.html?category=bathroom" class="category-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1758239873506-82d0e76244f6?auto=format&fit=crop&w=1000&q=85"
+                    alt="Complete modern bathroom with vanity and tiled floor"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=85';"
+                >
+
+                <div class="category-info">
+                    <span>03 / COLLECTION</span>
+                    <h3>Bathroom Tiles</h3>
+                    <p>Explore Collection ↗</p>
+                </div>
+
+            </a>
+
+            <a href="products.html?category=kitchen" class="category-card">
+
+                <img
+                    src="https://www.in2assets.co.za/uploads/users/12397/3848/image_exclusive-mansion-with-golf-course-and-sea-views_ri2wGotmMzLd.jpg"
+                    alt="Complete modern kitchen with tiled backsplash and floor"
+                    loading="lazy"
+                >
+
+                <div class="category-info">
+                    <span>04 / COLLECTION</span>
+                    <h3>Kitchen Tiles</h3>
+                    <p>Explore Collection ↗</p>
+                </div>
+
+            </a>
+
         </div>
-    </a>
-
-    <!-- WALL TILES: Feature wall living room -->
-    <a href="products.html?category=wall" class="category-card">
-        <img
-            src="https://cdn11.bigcommerce.com/s-4990d/images/stencil/2560w/products/31035/49163/60-326_8x8_Form_Sand_Deco_Blend_Porcelain__Tile_Lifestyle_-_Copy__32688.1641303367.jpg?c=2"
-            alt="Living room with decorative tiled feature wall"
-            loading="lazy"
-        >
-        <div class="category-info">
-            <span>02 / COLLECTION</span>
-            <h3>Wall Tiles</h3>
-            <p>Explore Collection ↗</p>
-        </div>
-    </a>
-
-    <!-- BATHROOM TILES: Complete bathroom -->
-    <a href="products.html?category=bathroom" class="category-card">
-    <img
-        src="https://images.unsplash.com/photo-1758239873506-82d0e76244f6?auto=format&fit=crop&w=1000&q=85"
-        alt="Complete modern bathroom with vanity and tiled floor"
-        loading="eager"
-        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=85';"
-    >
-    <div class="category-info">
-        <span>03 / COLLECTION</span>
-        <h3>Bathroom Tiles</h3>
-        <p>Explore Collection ↗</p>
-    </div>
-</a>
-
-    <!-- KITCHEN TILES: Complete kitchen -->
-    <a href="products.html?category=kitchen" class="category-card">
-        <img
-            src="https://www.in2assets.co.za/uploads/users/12397/3848/image_exclusive-mansion-with-golf-course-and-sea-views_ri2wGotmMzLd.jpg"
-            alt="Complete modern kitchen with tiled backsplash and floor"
-            loading="lazy"
-        >
-        <div class="category-info">
-            <span>04 / COLLECTION</span>
-            <h3>Kitchen Tiles</h3>
-            <p>Explore Collection ↗</p>
-        </div>
-    </a>
-
-</div>
 
     </div>
 
@@ -241,10 +486,12 @@
     <div class="container">
 
         <div class="section-heading">
+
             <div>
                 <p class="section-label">DESIGN POSSIBILITIES</p>
                 <h2>Details That Make <span>A Difference.</span></h2>
             </div>
+
         </div>
 
         <div class="design-grid">
@@ -301,39 +548,48 @@
         <div class="featured-grid">
 
             <article class="featured-card">
+
                 <img
                     src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85"
                     alt="Marble inspired interior design"
                     loading="lazy"
                 >
+
                 <div class="featured-info">
                     <span>CLASSIC STYLE</span>
                     <h3>Marble Inspiration</h3>
                 </div>
+
             </article>
 
             <article class="featured-card">
+
                 <img
                     src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"
                     alt="Modern premium interior"
                     loading="lazy"
                 >
+
                 <div class="featured-info">
                     <span>MODERN STYLE</span>
                     <h3>Contemporary Spaces</h3>
                 </div>
+
             </article>
 
             <article class="featured-card">
+
                 <img
                     src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85"
                     alt="Natural inspired interior"
                     loading="lazy"
                 >
+
                 <div class="featured-info">
                     <span>NATURAL STYLE</span>
                     <h3>Natural Elegance</h3>
                 </div>
+
             </article>
 
         </div>
@@ -342,54 +598,96 @@
 
 </section>
 
-<!-- GALLERY -->
-<!-- GALLERY -->
+<!-- LATEST PRODUCTS FROM MYSQL -->
+<section class="home-products section-padding" id="latestProducts">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="section-label">AVAILABLE IN OUR SHOWROOM</p>
+                <h2>Latest Tile <span>Collections.</span></h2>
+            </div>
+
+            <p>
+                Explore products currently available in our
+                Steve Tiles catalogue.
+            </p>
+
+        </div>
+
+        <div id="homeProductsMessage"
+             class="home-products-message"
+             aria-live="polite">
+            Loading our latest tile collections...
+        </div>
+
+        <div class="home-products-grid" id="homeProductsGrid"></div>
+
+        <div class="home-products-action">
+            <a href="products.html" class="btn btn-gold">
+                View All Collections ↗
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PREMIUM AUTO GALLERY -->
 <section class="gallery section-padding" id="gallery">
 
     <div class="container">
 
         <div class="section-heading">
+
             <div>
                 <p class="section-label">VISUAL INSPIRATION</p>
                 <h2>Explore Beautiful <span>Spaces.</span></h2>
             </div>
 
             <p>
-                Get inspired by complete interiors featuring
-                beautiful tile designs.
+                Explore tile applications in living rooms, bathrooms, kitchens,
+                bedrooms, outdoor spaces and commercial interiors.
             </p>
+
         </div>
 
-        <div class="gallery-grid">
+        <div class="gallery-slider">
 
-            <!-- LIVING ROOM -->
-            <div class="gallery-item gallery-large">
-                <img
-                    src="https://photos.zillowstatic.com/fp/1976f2b19cf295f7b6c75d14b5bbe014-cc_ft_576.jpg"
-                    alt="Full living room with marble-look tiled flooring"
-                    loading="lazy"
-                >
-                <span>Living Room</span>
+            <div class="gallery-slider-grid" id="publicGalleryGrid">
+
+                <p class="gallery-empty-message">
+                    Loading gallery images...
+                </p>
+
             </div>
 
-            <!-- BATHROOM -->
-            <div class="gallery-item">
-                <img
-                    src="https://images.finncdn.no/dynamic/1600w/2026/2/vertical-2/25/5/452/703/915_877450cd-dc40-48ae-97d1-c2ce05b5f23a.jpg"
-                    alt="Complete bathroom with tiled walls, shower and vanity"
-                    loading="lazy"
-                >
-                <span>Bathroom</span>
-            </div>
+            <div class="gallery-controls">
 
-            <!-- KITCHEN -->
-            <div class="gallery-item">
-                <img
-                    src="https://lid.zoocdn.com/u/1024/768/3596cd815bccc8959e681eb6fcb9607750917a58.jpg"
-                    alt="Complete modern kitchen with tiled backsplash and floor"
-                    loading="lazy"
-                >
-                <span>Kitchen</span>
+                <button type="button" id="galleryPrev"
+                        aria-label="Previous image">
+                    ←
+                </button>
+
+                <div class="gallery-slide-info">
+                    <span id="galleryCounter">01 / 01</span>
+                    <div class="gallery-progress">
+                        <div id="galleryProgress"></div>
+                    </div>
+                </div>
+
+                <button type="button" id="galleryPlayPause"
+                        aria-label="Pause slideshow">
+                    Pause
+                </button>
+
+                <button type="button" id="galleryNext"
+                        aria-label="Next image">
+                    →
+                </button>
+
             </div>
 
         </div>
@@ -488,6 +786,7 @@
     <div class="container footer-top">
 
         <div class="footer-brand">
+
             <a href="#home" class="logo footer-logo">
                 STEVE <span>TILES.</span>
             </a>
@@ -496,37 +795,810 @@
                 Beautiful tile designs for<br>
                 inspiring living spaces.
             </p>
+
         </div>
 
         <div class="footer-links">
+
             <h4>Quick Links</h4>
             <a href="#home">Home</a>
             <a href="#about">About Us</a>
             <a href="#collections">Collections</a>
             <a href="#gallery">Gallery</a>
             <a href="#contact">Contact</a>
+
         </div>
 
         <div class="footer-links">
+
             <h4>Collections</h4>
             <a href="products.html?category=floor">Floor Tiles</a>
             <a href="products.html?category=wall">Wall Tiles</a>
             <a href="products.html?category=bathroom">Bathroom Tiles</a>
             <a href="products.html?category=kitchen">Kitchen Tiles</a>
+
         </div>
 
     </div>
 
     <div class="footer-bottom">
+
         <div class="container">
             <p>© 2026 Steve Tiles. All Rights Reserved.</p>
             <a href="#home">Back to Top ↑</a>
         </div>
+
     </div>
 
 </footer>
 
-<script src="script.js"></script>
+<!-- GALLERY IMAGE LIGHTBOX -->
+<div class="gallery-lightbox" id="galleryLightbox"
+     role="dialog" aria-modal="true"
+     aria-label="Gallery image preview">
 
+    <button type="button" class="gallery-lightbox-close"
+            id="galleryLightboxClose"
+            aria-label="Close image preview">
+        &times;
+    </button>
+
+    <img src="" alt="Expanded gallery image"
+         id="galleryLightboxImage">
+
+</div>
+
+<!-- PUBLIC GALLERY JAVASCRIPT -->
+<script>
+
+const GALLERY_API = "http://127.0.0.1:5000";
+const GALLERY_INTERVAL = 5000;
+
+/* BUILT-IN GALLERY IMAGES */
+
+const defaultGalleryImages = [
+
+    {
+        title: "Luxury Living Room - Marble Look Floor",
+        category: "LIVING ROOM TILES",
+        image_path: "https://activehomecentre.com/cdn/shop/files/10-FLR-2448-FSB-000003_3_1800x1800.png?v=1778947026"
+    },
+
+    {
+        title: "Modern Bathroom - Grey Stone Tiles",
+        category: "BATHROOM TILES",
+        image_path: "https://media.adeo.com/media/4895792/media.jpg"
+    },
+
+    {
+        title: "Contemporary Kitchen - Porcelain Floor Tiles",
+        category: "KITCHEN TILES",
+        image_path: "https://media.adeo.com/media/4902203/media.jpg"
+    },
+
+    {
+        title: "Elegant Bedroom - Marble Effect Flooring",
+        category: "BEDROOM TILES",
+        image_path: "https://www.adiconceramica.co.in/uploads/products/1721822232.-belisimo-p.jpg"
+    },
+
+    {
+        title: "Outdoor Patio - Stone Effect Anti-Slip Tiles",
+        category: "OUTDOOR TILES",
+        image_path: "https://reflex-boutique.fr/99483-medium_default/carrelage-sol-exterieur-effet-pierre-thebes-gris-r11-408x662-cm.jpg"
+    },
+
+    {
+        title: "Commercial Lobby - Large Format Floor Tiles",
+        category: "COMMERCIAL TILES",
+        image_path: "https://ilexceramica.com/uploads/pages/Dynimg_698bf604a13a2.webp"
+    }
+
+];
+
+let publicGalleryImages = [];
+let currentGalleryIndex = 0;
+let galleryTimer = null;
+let galleryProgressTimer = null;
+let galleryIsPlaying = true;
+
+const galleryGrid = document.getElementById("publicGalleryGrid");
+const galleryCounter = document.getElementById("galleryCounter");
+const galleryProgress = document.getElementById("galleryProgress");
+const galleryPlayPause = document.getElementById("galleryPlayPause");
+const galleryControls = document.querySelector(".gallery-controls");
+
+const galleryLightbox = document.getElementById("galleryLightbox");
+const galleryLightboxImage = document.getElementById("galleryLightboxImage");
+
+/* SAFE TEXT */
+
+function escapeGalleryText(value) {
+
+    return String(value || "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[character]);
+
+}
+
+/* IMAGE URL */
+
+function getGalleryImageUrl(image) {
+
+    const path = String(image.image || image.image_path || "");
+
+    if (!path) return "";
+
+    if (path.startsWith("http://") ||
+        path.startsWith("https://")) {
+        return path;
+    }
+
+    return `${GALLERY_API}/${path.replace(/^\/+/, "")}`;
+}
+
+/* LOAD DEFAULT AND ADMIN IMAGES */
+
+async function loadPublicGallery() {
+
+    // Built-in images are available even if the backend is offline.
+    publicGalleryImages = [...defaultGalleryImages];
+
+    try {
+
+        const response = await fetch(
+            `${GALLERY_API}/api/gallery`,
+            { cache: "no-store" }
+        );
+
+        if (response.ok) {
+
+            const result = await response.json();
+
+            if (result.status === "success" &&
+                Array.isArray(result.images)) {
+
+                const adminImages = result.images.map(image => ({
+                    ...image,
+                    category: "STEVE TILES SHOWROOM"
+                }));
+
+                // Admin uploads appear before built-in gallery images.
+                publicGalleryImages = [
+                    ...adminImages,
+                    ...defaultGalleryImages
+                ];
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.log("Using built-in gallery images.", error);
+
+    }
+
+    currentGalleryIndex = 0;
+
+    renderPublicGallery();
+
+    if (publicGalleryImages.length > 1) {
+
+        galleryControls.style.display = "flex";
+        galleryPlayPause.style.display = "inline-block";
+
+        document.getElementById("galleryPrev").disabled = false;
+        document.getElementById("galleryNext").disabled = false;
+
+        startGallerySlideshow();
+
+    }
+
+}
+
+/* DISPLAY GALLERY */
+
+function renderPublicGallery() {
+
+    galleryGrid.innerHTML = publicGalleryImages.map((image, index) => {
+
+        const title = escapeGalleryText(
+  image.title || "Elegant Showroom Tile Collection"
+        );
+
+        const category = escapeGalleryText(
+            image.category || "DESIGN INSPIRATION"
+        );
+
+        return `
+
+            <div class="gallery-slide ${index === 0 ? "active" : ""}"
+                 data-gallery-index="${index}"
+                 role="button"
+                 tabindex="0"
+                 aria-label="View ${title}">
+
+                <img
+                    src="${escapeGalleryText(getGalleryImageUrl(image))}"
+                    alt="${title} - Design Inspiration"
+                    loading="${index === 0 ? "eager" : "lazy"}"
+                >
+
+                <div class="gallery-slide-caption">
+
+                    <span>STEVE TILES • ${category}</span>
+
+                    <h3>${title}</h3>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }).join("");
+
+    updateGalleryCounter();
+    attachGalleryImageEvents();
+
+}
+
+/* CHANGE IMAGE */
+
+function showGallerySlide(index) {
+
+    if (!publicGalleryImages.length) return;
+
+    currentGalleryIndex =
+        (index + publicGalleryImages.length) % publicGalleryImages.length;
+
+    document.querySelectorAll(".gallery-slide").forEach((slide, i) => {
+
+        slide.classList.toggle(
+            "active",
+            i === currentGalleryIndex
+        );
+
+    });
+
+    updateGalleryCounter();
+
+    if (galleryIsPlaying) {
+        resetGalleryProgress();
+    }
+
+}
+
+function updateGalleryCounter() {
+
+    const current = String(currentGalleryIndex + 1).padStart(2, "0");
+    const total = String(publicGalleryImages.length).padStart(2, "0");
+
+    galleryCounter.textContent = `${current} / ${total}`;
+
+}
+
+function nextGallerySlide() {
+    showGallerySlide(currentGalleryIndex + 1);
+}
+
+function previousGallerySlide() {
+    showGallerySlide(currentGalleryIndex - 1);
+}
+
+/* AUTOMATIC SLIDESHOW */
+
+function startGallerySlideshow() {
+
+    stopGallerySlideshow();
+
+    galleryIsPlaying = true;
+
+    galleryPlayPause.textContent = "Pause";
+
+    galleryPlayPause.setAttribute(
+        "aria-label",
+        "Pause slideshow"
+    );
+
+    galleryTimer = setInterval(() => {
+        nextGallerySlide();
+    }, GALLERY_INTERVAL);
+
+    resetGalleryProgress();
+
+}
+
+function stopGallerySlideshow() {
+
+    clearInterval(galleryTimer);
+    clearInterval(galleryProgressTimer);
+
+    galleryTimer = null;
+    galleryProgressTimer = null;
+
+}
+
+function resetGalleryProgress() {
+
+    clearInterval(galleryProgressTimer);
+
+    galleryProgress.style.transition = "none";
+    galleryProgress.style.width = "0%";
+
+    if (!galleryIsPlaying) return;
+
+    requestAnimationFrame(() => {
+
+        galleryProgress.style.transition =
+            `width ${GALLERY_INTERVAL}ms linear`;
+
+        galleryProgress.style.width = "100%";
+
+    });
+
+}
+
+/* PLAY AND PAUSE */
+
+function toggleGallerySlideshow() {
+
+    if (galleryIsPlaying) {
+
+        galleryIsPlaying = false;
+
+        stopGallerySlideshow();
+
+        galleryPlayPause.textContent = "Play";
+
+        galleryPlayPause.setAttribute(
+            "aria-label",
+            "Play slideshow"
+        );
+
+        galleryProgress.style.transition = "none";
+        galleryProgress.style.width = "0%";
+
+    } else {
+
+        startGallerySlideshow();
+
+    }
+
+}
+
+/* IMAGE CLICK EVENTS */
+
+function attachGalleryImageEvents() {
+
+    document.querySelectorAll(".gallery-slide").forEach(slide => {
+
+        slide.addEventListener("click", () => {
+
+            const index = Number(slide.dataset.galleryIndex);
+            openGalleryLightbox(index);
+
+        });
+
+        slide.addEventListener("keydown", event => {
+
+            if (event.key === "Enter" || event.key === " ") {
+
+                event.preventDefault();
+
+                const index = Number(slide.dataset.galleryIndex);
+                openGalleryLightbox(index);
+
+            }
+
+        });
+
+    });
+
+}
+
+/* IMAGE LIGHTBOX */
+
+function openGalleryLightbox(index) {
+
+    const image = publicGalleryImages[index];
+
+    if (!image) return;
+
+    galleryLightboxImage.src = getGalleryImageUrl(image);
+
+    galleryLightboxImage.alt =
+        image.title || "Steve Tiles gallery image";
+
+    galleryLightbox.classList.add("open");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+function closeGalleryLightbox() {
+
+    galleryLightbox.classList.remove("open");
+    document.body.style.overflow = "";
+
+}
+
+document.getElementById("galleryLightboxClose")
+    .addEventListener("click", closeGalleryLightbox);
+
+galleryLightbox.addEventListener("click", event => {
+
+    if (event.target === galleryLightbox) {
+        closeGalleryLightbox();
+    }
+
+});
+
+document.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") {
+        closeGalleryLightbox();
+    }
+
+});
+
+/* NEXT AND PREVIOUS BUTTONS */
+
+document.getElementById("galleryNext")
+    .addEventListener("click", () => {
+
+        nextGallerySlide();
+
+        if (galleryIsPlaying) {
+            startGallerySlideshow();
+        }
+
+    });
+
+document.getElementById("galleryPrev")
+    .addEventListener("click", () => {
+
+        previousGallerySlide();
+
+        if (galleryIsPlaying) {
+            startGallerySlideshow();
+        }
+
+    });
+
+galleryPlayPause.addEventListener(
+    "click",
+    toggleGallerySlideshow
+);
+
+/* START GALLERY */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadPublicGallery
+);
+
+</script>
+
+
+<!-- DYNAMIC WEBSITE SETTINGS -->
+<script>
+const SETTINGS_API = "http://127.0.0.1:5000";
+
+function publicAssetUrl(path) {
+    if (!path) return "";
+    if (/^https?:\/\//i.test(path)) return path;
+    return `${SETTINGS_API}/${String(path).replace(/^\/+/, "")}`;
+}
+
+function setText(selector, value) {
+    const element = document.querySelector(selector);
+    if (element && value) element.textContent = value;
+}
+
+async function loadPublicWebsiteSettings() {
+    try {
+        const response = await fetch(
+            `${SETTINGS_API}/api/settings/general`,
+            { cache: "no-store" }
+        );
+
+        const result = await response.json();
+
+        if (result.status === "success" && result.settings) {
+            const s = result.settings;
+
+            // Website name
+            if (s.website_name) {
+                document.title = s.website_name + " | Explore Beautiful Spaces";
+
+                document.querySelectorAll(".logo").forEach(logo => {
+                    logo.textContent = s.website_name.toUpperCase() + ".";
+                });
+            }
+
+            // General description
+            if (s.description) {
+                setText(".about-content > p:nth-of-type(2)", s.description);
+
+                const metaDescription =
+                    document.querySelector('meta[name="description"]');
+
+                if (metaDescription) {
+                    metaDescription.content = s.description;
+                }
+            }
+
+            // General tagline
+            if (s.tagline) {
+                setText(".hero-description", s.tagline);
+            }
+
+            // Website status
+            if (s.website_status === "maintenance") {
+                document.body.innerHTML = `
+                    <main style="
+                        min-height:100vh;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        text-align:center;
+                        padding:25px;
+                        font-family:Arial,sans-serif;
+                        background:#f6f3ee;
+                    ">
+                        <div>
+                            <h1>Steve Tiles</h1>
+                            <h2>We'll Be Back Soon!</h2>
+                            <p>Our website is temporarily under maintenance.</p>
+                            <p>Please contact our showroom for assistance.</p>
+                        </div>
+                    </main>
+                `;
+                return;
+            }
+        }
+
+    } catch (error) {
+        console.error("General settings error:", error);
+    }
+
+    await loadExtraPublicSettings();
+}
+
+async function loadExtraPublicSettings() {
+    try {
+        const response = await fetch(
+            `${SETTINGS_API}/api/settings/extra`,
+            { cache: "no-store" }
+        );
+
+        const result = await response.json();
+
+        if (result.status !== "success" || !result.settings) return;
+
+        const s = result.settings;
+
+        // BRANDING COLOURS
+        if (s.primary_color) {
+            document.documentElement.style.setProperty(
+                "--primary-color", s.primary_color
+            );
+        }
+
+        if (s.secondary_color) {
+            document.documentElement.style.setProperty(
+                "--secondary-color", s.secondary_color
+            );
+        }
+
+        // LOGO IMAGE
+        if (s.logo_url) {
+            document.querySelectorAll(".logo").forEach(logo => {
+                const img = document.createElement("img");
+                img.src = publicAssetUrl(s.logo_url);
+                img.alt = "Steve Tiles";
+                img.style.maxHeight = "55px";
+                img.style.maxWidth = "180px";
+                img.style.objectFit = "contain";
+                logo.replaceChildren(img);
+            });
+        }
+
+        // FAVICON
+        if (s.favicon_url) {
+            let favicon = document.querySelector("link[rel='icon']");
+
+            if (!favicon) {
+                favicon = document.createElement("link");
+                favicon.rel = "icon";
+                document.head.appendChild(favicon);
+            }
+
+            favicon.href = publicAssetUrl(s.favicon_url);
+        }
+
+        // HOMEPAGE TITLE
+        if (s.home_title) {
+            setText(".hero-content h1", s.home_title);
+        }
+
+        // HOMEPAGE SUBTITLE
+        if (s.home_subtitle) {
+            setText(".hero-content .eyebrow", s.home_subtitle);
+        }
+
+        // HOMEPAGE DESCRIPTION
+        if (s.home_description) {
+            setText(".hero-description", s.home_description);
+        }
+
+        // HOMEPAGE BANNER
+        if (s.home_banner_url) {
+            const firstSlide = document.querySelector(".slide-one");
+
+            if (firstSlide) {
+                firstSlide.style.backgroundImage =
+                    `url("${publicAssetUrl(s.home_banner_url)}")`;
+                firstSlide.style.backgroundSize = "cover";
+                firstSlide.style.backgroundPosition = "center";
+            }
+        }
+
+        // CONTACT INFORMATION
+        const contactContent =
+            document.querySelector(".contact-content");
+
+        if (contactContent) {
+            const details =
+                contactContent.querySelectorAll(".contact-detail");
+
+            // Email
+            if (s.email && details[0]) {
+                const emailParagraph = details[0].querySelector("p");
+                emailParagraph.replaceChildren();
+
+                const emailLink = document.createElement("a");
+                emailLink.href = "mailto:" + s.email;
+                emailLink.textContent = s.email;
+
+                emailParagraph.appendChild(emailLink);
+            }
+
+            // Address
+            if (s.address && details[1]) {
+                details[1].querySelector("p").textContent = s.address;
+            }
+
+            // Phone
+            if (s.phone) {
+                const phone = document.createElement("div");
+                phone.className = "contact-detail";
+
+                const icon = document.createElement("span");
+                icon.textContent = "☎";
+
+                const content = document.createElement("div");
+                const label = document.createElement("small");
+                label.textContent = "PHONE";
+
+                const paragraph = document.createElement("p");
+                const link = document.createElement("a");
+                link.href = "tel:" + s.phone;
+                link.textContent = s.phone;
+
+                paragraph.appendChild(link);
+                content.append(label, paragraph);
+                phone.append(icon, content);
+                contactContent.appendChild(phone);
+            }
+
+            // WhatsApp
+            if (s.whatsapp) {
+                const whatsapp = document.createElement("a");
+                whatsapp.href =
+                    "https://wa.me/" + s.whatsapp.replace(/\D/g, "");
+
+                whatsapp.target = "_blank";
+                whatsapp.rel = "noopener noreferrer";
+                whatsapp.textContent = "Chat with us on WhatsApp ↗";
+                whatsapp.style.display = "inline-block";
+                whatsapp.style.marginTop = "15px";
+
+                contactContent.appendChild(whatsapp);
+            }
+
+            // BUSINESS HOURS
+            if (
+                s.opening_time ||
+                s.closing_time ||
+                s.working_days ||
+                s.holiday_note
+            ) {
+                const hours = document.createElement("div");
+                hours.className = "contact-detail";
+
+                const icon = document.createElement("span");
+                icon.textContent = "◷";
+
+                const content = document.createElement("div");
+                const label = document.createElement("small");
+                label.textContent = "SHOWROOM HOURS";
+
+                const paragraph = document.createElement("p");
+
+                const lines = [
+                    s.working_days,
+                    s.opening_time && s.closing_time
+                        ? s.opening_time + " – " + s.closing_time
+                        : "",
+                    s.holiday_note
+                ].filter(Boolean);
+
+                paragraph.textContent = lines.join(" | ");
+
+                content.append(label, paragraph);
+                hours.append(icon, content);
+                contactContent.appendChild(hours);
+            }
+        }
+
+        // SOCIAL MEDIA LINKS
+        const footerBrand =
+            document.querySelector(".footer-brand");
+
+        if (footerBrand) {
+            const socialLinks = [
+                ["Instagram", s.instagram_url],
+                ["Facebook", s.facebook_url],
+                ["YouTube", s.youtube_url],
+                ["Other", s.other_social_url]
+            ].filter(item => item[1]);
+
+            if (socialLinks.length) {
+                const social = document.createElement("div");
+                social.className = "public-social-links";
+                social.style.display = "flex";
+                social.style.flexWrap = "wrap";
+                social.style.gap = "15px";
+                social.style.marginTop = "20px";
+
+                socialLinks.forEach(([name, url]) => {
+                    try {
+                        const parsed = new URL(url);
+
+                        if (!["http:", "https:"].includes(parsed.protocol)) {
+                            return;
+                        }
+
+                        const link = document.createElement("a");
+                        link.href = parsed.href;
+                        link.textContent = name;
+                        link.target = "_blank";
+                        link.rel = "noopener noreferrer";
+
+                        social.appendChild(link);
+                    } catch (error) {
+                        console.warn("Invalid social URL:", url);
+                    }
+                });
+
+                footerBrand.appendChild(social);
+            }
+        }
+
+    } catch (error) {
+        console.error("Extra website settings error:", error);
+    }
+}
+
+// LOAD SETTINGS
+loadPublicWebsiteSettings();
+</script>
 </body>
 </html>

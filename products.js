@@ -1,642 +1,440 @@
 
-let products = [];
+/* =========================================
+   STEVE TILES - 25 PRODUCT COLLECTIONS
+   WITH PROFESSIONAL POPUPS & NOTIFICATIONS
+========================================= */
 
-const categoryNames = {
-    floor: "Floor Tiles",
-    wall: "Wall Tiles",
-    bathroom: "Bathroom Tiles",
-    kitchen: "Kitchen Tiles",
-    outdoor: "Outdoor Tiles"
-};
+const IMAGE_FOLDER = "images/Tiles/";
 
-// HTML ELEMENTS
+const allProducts = [
+    { code: "ST001", name: "Botein Mink Marble", categories: ["wall"], size: "600 × 600 mm", finish: "Matte", material: "Porcelain", type: "Marble Look", description: "Elegant beige and grey marble-look tile." },
+    { code: "ST002", name: "Les Bijoux Beige", categories: ["floor", "wall"], size: "800 × 1600 mm", finish: "Polished", material: "Porcelain", type: "Marble Look", description: "Premium beige marble-inspired tile with natural veining." },
+    { code: "ST003", name: "Taj Mahal Grey", categories: ["floor", "bathroom"], size: "600 × 600 mm", finish: "Matte", material: "Porcelain", type: "Stone Look", description: "Soft grey and beige natural stone-inspired surface." },
+    { code: "ST004", name: "Opal Yamuna", categories: ["floor", "wall", "kitchen"], size: "600 × 1200 mm", finish: "Polished", material: "Porcelain", type: "Marble Look", description: "Elegant beige surface with soft natural veining." },
+    { code: "ST005", name: "Amico Light", categories: ["floor", "wall", "kitchen"], size: "600 × 1200 mm", finish: "Glossy", material: "Porcelain", type: "Marble Look", description: "Glossy beige-grey marble-look tile." },
+    { code: "ST006", name: "Avalon White", categories: ["floor", "wall", "bathroom"], size: "600 × 1200 mm", finish: "Polished", material: "Porcelain", type: "Marble Look", description: "White marble-inspired tile with grey veining." },
+    { code: "ST007", name: "Liquorice Dark Grey", categories: ["floor", "wall", "outdoor"], size: "600 × 600 mm", finish: "Matte", material: "Porcelain", type: "Concrete Look", description: "Deep charcoal grey surface with subtle texture." },
+    { code: "ST008", name: "Blue Lagoon", categories: ["wall", "bathroom", "kitchen"], size: "600 × 600 mm", finish: "Glossy", material: "Ceramic", type: "Decorative", description: "Blue-green decorative ceramic wall tile." },
+    { code: "ST009", name: "Blanc Calacatta", categories: ["floor", "wall", "bathroom"], size: "600 × 1200 mm", finish: "Matte", material: "Porcelain", type: "Marble Look", description: "White marble-look porcelain tile with bold grey veining." },
+    { code: "ST010", name: "Ergon Dark Grey", categories: ["floor", "outdoor"], size: "600 × 600 mm", finish: "Matte", material: "Porcelain", type: "Concrete Look", description: "Dark grey concrete-inspired porcelain tile." },
+    { code: "ST011", name: "Marza Aqua", categories: ["wall", "bathroom"], size: "600 × 1200 mm", finish: "Glossy", material: "Ceramic", type: "Subway", description: "Blue-green glossy tile for feature walls." },
+    { code: "ST012", name: "Nilo Decorative", categories: ["wall"], size: "600 × 600 mm", finish: "Glossy", material: "Ceramic", type: "Decorative", description: "Decorative teal ceramic tile with a raised pattern." },
+    { code: "ST013", name: "Premium White Marble", categories: ["floor", "wall"], size: "600 × 1200 mm", finish: "Glossy", material: "Porcelain", type: "Marble Look", description: "Premium white marble-look tile." },
+    { code: "ST014", name: "Premium Beige Marble", categories: ["floor", "wall"], size: "600 × 1200 mm", finish: "Glossy", material: "Porcelain", type: "Marble Look", description: "Warm beige marble-look tile for elegant interiors." },
+    { code: "ST015", name: "Wooden Oak Floor", categories: ["floor"], size: "600 × 1200 mm", finish: "Matte", material: "Porcelain", type: "Wood Look", description: "Natural oak wood-inspired floor tile." },
+    { code: "ST016", name: "Premium Beige Marble Large", categories: ["floor", "wall"], size: "800 × 1600 mm", finish: "Polished", material: "Porcelain", type: "Marble Look", description: "Large-format premium beige marble-look tile." },
+    { code: "ST017", name: "Walnut Wood Floor", categories: ["floor"], size: "600 × 1200 mm", finish: "Matte", material: "Porcelain", type: "Wood Look", description: "Rich walnut wood-inspired tile." },
+    { code: "ST018", name: "Emerald Zellige", categories: ["kitchen", "wall"], size: "600 × 600 mm", finish: "Glossy", material: "Ceramic", type: "Decorative", description: "Emerald green decorative tile for statement walls." },
+    { code: "ST019", name: "Navy Subway", categories: ["kitchen", "wall"], size: "600 × 600 mm", finish: "Glossy", material: "Ceramic", type: "Subway", description: "Modern navy blue subway-style wall tile." },
+    { code: "ST020", name: "Sage Green Decorative", categories: ["bathroom", "wall"], size: "600 × 600 mm", finish: "Matte", material: "Ceramic", type: "Decorative", description: "Soft sage green decorative tile." },
+    { code: "ST021", name: "White Fluted Decor", categories: ["wall", "bathroom"], size: "600 × 1200 mm", finish: "Matte", material: "Ceramic", type: "Decorative", description: "Modern white fluted tile for feature walls." },
+    { code: "ST022", name: "Terrazzo White", categories: ["floor", "wall"], size: "600 × 600 mm", finish: "Matte", material: "Porcelain", type: "Terrazzo Look", description: "Contemporary white terrazzo-inspired tile." },
+    { code: "ST023", name: "Black Granite", categories: ["floor", "outdoor"], size: "600 × 600 mm", finish: "Polished", material: "Porcelain", type: "Granite Look", description: "Bold black granite-inspired tile." },
+    { code: "ST024", name: "Ivory Limestone", categories: ["floor", "outdoor"], size: "600 × 1200 mm", finish: "Matte", material: "Porcelain", type: "Stone Look", description: "Natural ivory limestone-inspired tile." },
+    { code: "ST025", name: "Beige Sandstone", categories: ["floor", "outdoor"], size: "600 × 600 mm", finish: "Matte", material: "Porcelain", type: "Stone Look", description: "Warm beige sandstone-inspired tile." }
+].map((product, index) => ({
+    ...product,
+    id: index + 1,
+    image: `${IMAGE_FOLDER}${product.code}.jpg`
+}));
+
+let filteredProducts = [...allProducts];
 
 const productGrid = document.getElementById("productGrid");
 const productCount = document.getElementById("productCount");
-const searchInput = document.getElementById("catalogSearch");
+const catalogSearch = document.getElementById("catalogSearch");
 const sizeFilter = document.getElementById("sizeFilter");
 const finishFilter = document.getElementById("finishFilter");
 const sortFilter = document.getElementById("sortFilter");
 const emptyProducts = document.getElementById("emptyProducts");
 
-const productDialog = document.getElementById("productDialog");
-const productDetails = document.getElementById("productDetails");
-const enquiryDialog = document.getElementById("enquiryDialog");
-const enquiryForm = document.getElementById("productEnquiryForm");
+/* SAFE HTML */
 
-let activeCategory = "all";
-
-
-// ========================================
-// LOAD PRODUCTS FROM FLASK API
-// ========================================
-
-async function loadProducts() {
-    try {
-        const response = await fetch("http://127.0.0.1:5000/api/products");
-
-        if (!response.ok) {
-            throw new Error(`Products API returned ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        if (data.status !== "success" || !Array.isArray(data.products)) {
-            throw new Error("The products API returned an unexpected response.");
-        }
-
-        products = data.products.map(function(item) {
-            return {
-                // Keep existing ST001-style product IDs.
-                id: item.code || String(item.id),
-                dbId: item.id,
-
-                name: item.name || "",
-                categories: Array.isArray(item.categories)
-                    ? item.categories
-                    : [],
-
-                type: item.type || "",
-                size: item.size || "",
-                finish: item.finish || "",
-                material: item.material || "",
-                image: item.image || "",
-                description: item.description || "",
-                price: item.price
-            };
-        });
-
-        console.log(`Loaded ${products.length} products from the database.`);
-
-    } catch (error) {
-        console.error("Unable to load products from the backend:", error);
-
-        productGrid.innerHTML = "";
-        productGrid.hidden = true;
-
-        emptyProducts.hidden = false;
-
-        emptyProducts.textContent =
-            "Unable to load tile products. Please make sure the Steve Tiles backend is running and try again.";
-
-        productCount.textContent = "Products could not be loaded.";
-
-        throw error;
-    }
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[char]);
 }
 
+/* PROFESSIONAL TOAST NOTIFICATIONS */
 
-// ========================================
-// URL PARAMETERS
-// ========================================
+function showSteveToast(message, type = "success") {
+    let container = document.getElementById("toastContainer");
 
-const pageParams = new URLSearchParams(window.location.search);
-
-const initialCategory = pageParams.get("category") || "";
-const initialSearch = pageParams.get("q") || "";
-
-function getCategoryFromURL(value) {
-    const text = value.toLowerCase();
-
-    if (text.includes("bath")) return "bathroom";
-    if (text.includes("kitchen")) return "kitchen";
-    if (text.includes("wall")) return "wall";
-    if (text.includes("outdoor")) return "outdoor";
-    if (text.includes("floor")) return "floor";
-
-    return "all";
-}
-
-
-// ========================================
-// DISPLAY PRODUCTS
-// ========================================
-
-function displayProducts(list) {
-
-    productGrid.innerHTML = "";
-
-    list.forEach(function(product) {
-
-        const categoryText =
-            categoryNames[product.categories[0]] || "Tiles";
-
-        const card = document.createElement("article");
-
-        card.className = "tile-card";
-
-        card.innerHTML = `
-            <div class="tile-image-wrap">
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name} tile sample"
-                    loading="lazy"
-                >
-
-            </div>
-
-            <div class="tile-card-content">
-
-                <span class="tile-category">
-                    ${categoryText}
-                </span>
-
-                <h3>${product.name}</h3>
-
-                <div class="tile-specs">
-
-                    <span>${product.size}</span>
-
-                    <span>${product.finish}</span>
-
-                    <span>${product.material}</span>
-
-                </div>
-
-                <div class="tile-price">
-                    Enquire for price
-                </div>
-
-                <div class="tile-actions">
-
-                    <button
-                        class="view-details"
-                        data-action="details"
-                        data-id="${product.id}">
-
-                        View Details
-
-                    </button>
-
-                    <button
-                        class="enquire-tile"
-                        data-action="enquire"
-                        data-id="${product.id}">
-
-                        Enquire Now
-
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-
-        const image = card.querySelector("img");
-
-        image.addEventListener("error", function() {
-
-            this.style.display = "none";
-
-            this.parentElement.innerHTML =
-                '<span class="image-fallback">Image unavailable</span>';
-
-        });
-
-        productGrid.appendChild(card);
-
-    });
-
-    productCount.textContent =
-        `Showing ${list.length} of ${products.length} tile designs`;
-
-    emptyProducts.hidden = list.length !== 0;
-
-    productGrid.hidden = list.length === 0;
-
-}
-
-
-// ========================================
-// FILTER PRODUCTS
-// ========================================
-
-function filterProducts() {
-
-    let filtered = [...products];
-
-    // CATEGORY FILTER
-
-    if (activeCategory !== "all") {
-
-        filtered = filtered.filter(function(product) {
-
-            return product.categories.includes(activeCategory);
-
-        });
-
+    if (!container) {
+        container = document.createElement("div");
+        container.id = "toastContainer";
+        document.body.appendChild(container);
     }
 
-    // SEARCH FILTER
-
-    const searchText = searchInput.value.trim().toLowerCase();
-
-    if (searchText) {
-
-        filtered = filtered.filter(function(product) {
-
-            const searchableText = [
-
-                product.name,
-                product.type,
-                product.size,
-                product.finish,
-                product.material,
-                product.description,
-
-                product.categories.map(function(category) {
-
-                    return categoryNames[category] || category;
-
-                }).join(" ")
-
-            ].join(" ").toLowerCase();
-
-            return searchableText.includes(searchText);
-
-        });
-
-    }
-
-    // SIZE FILTER
-
-    if (sizeFilter.value !== "all") {
-
-        filtered = filtered.filter(function(product) {
-
-            return product.size === sizeFilter.value;
-
-        });
-
-    }
-
-    // FINISH FILTER
-
-    if (finishFilter.value !== "all") {
-
-        filtered = filtered.filter(function(product) {
-
-            return product.finish === finishFilter.value;
-
-        });
-
-    }
-
-    // SORTING
-
-    if (sortFilter.value === "az") {
-
-        filtered.sort((a, b) =>
-            a.name.localeCompare(b.name)
-        );
-
-    }
-
-    if (sortFilter.value === "za") {
-
-        filtered.sort((a, b) =>
-            b.name.localeCompare(a.name)
-        );
-
-    }
-
-    displayProducts(filtered);
-
-}
-
-
-// ========================================
-// CATEGORY BUTTONS
-// ========================================
-
-document.querySelectorAll(".category-filter").forEach(function(button) {
-
-    button.addEventListener("click", function() {
-
-        document.querySelectorAll(".category-filter").forEach(function(item) {
-
-            item.classList.remove("active");
-
-        });
-
-        button.classList.add("active");
-
-        activeCategory = button.dataset.category;
-
-        filterProducts();
-
-    });
-
-});
-
-
-// ========================================
-// SEARCH AND FILTER EVENTS
-// ========================================
-
-searchInput.addEventListener("input", filterProducts);
-
-sizeFilter.addEventListener("change", filterProducts);
-
-finishFilter.addEventListener("change", filterProducts);
-
-sortFilter.addEventListener("change", filterProducts);
-
-
-// ========================================
-// PRODUCT DETAILS
-// ========================================
-
-function openProductDetails(product) {
-
-    productDetails.innerHTML = `
-
-        <img
-            class="dialog-product-image"
-            src="${product.image}"
-            alt="${product.name}"
-        >
-
-        <span class="tile-category">
-            ${product.id}
-        </span>
-
-        <h2>${product.name}</h2>
-
-        <p>${product.description}</p>
-
-        <p>
-
-            <strong>Category:</strong>
-
-            ${product.categories.map(c => categoryNames[c] || c).join(", ")}
-
-        </p>
-
-        <p>
-            <strong>Tile Type:</strong>
-            ${product.type}
-        </p>
-
-        <p>
-            <strong>Size:</strong>
-            ${product.size}
-        </p>
-
-        <p>
-            <strong>Finish:</strong>
-            ${product.finish}
-        </p>
-
-        <p>
-            <strong>Material:</strong>
-            ${product.material}
-        </p>
-
-        <p>
-            <strong>Price:</strong>
-            Enquire for price
-        </p>
-
-        <button class="dialog-enquire-button" id="detailsEnquire">
-
-            Enquire About This Tile
-
-        </button>
-
+    const toast = document.createElement("div");
+    toast.className = `steve-toast ${type}`;
+
+    const icon = type === "error" ? "!" :
+                 type === "info" ? "i" : "✓";
+
+    toast.innerHTML = `
+        <strong>${icon}</strong>
+        <span>${escapeHTML(message)}</span>
     `;
 
-    productDetails.querySelector("img").addEventListener("error", function() {
+    container.appendChild(toast);
 
-        this.style.display = "none";
+    setTimeout(() => {
+        toast.classList.add("hide");
+        setTimeout(() => toast.remove(), 350);
+    }, 3000);
+}
 
+/* FILTER OPTIONS */
+
+function populateFilterOptions() {
+    const sizes = [...new Set(allProducts.map(p => p.size))].sort();
+    const finishes = [...new Set(allProducts.map(p => p.finish))].sort();
+
+    if (sizeFilter) {
+        sizeFilter.innerHTML = '<option value="all">All Sizes</option>';
+
+        sizes.forEach(size => {
+            sizeFilter.innerHTML +=
+                `<option value="${escapeHTML(size)}">${escapeHTML(size)}</option>`;
+        });
+    }
+
+    if (finishFilter) {
+        finishFilter.innerHTML = '<option value="all">All Finishes</option>';
+
+        finishes.forEach(finish => {
+            finishFilter.innerHTML +=
+                `<option value="${escapeHTML(finish)}">${escapeHTML(finish)}</option>`;
+        });
+    }
+}
+
+/* CATEGORY TEXT */
+
+function getCategoryText(product) {
+    return product.categories.join(", ");
+}
+
+/* FILTER PRODUCTS */
+
+function applyFilters() {
+    const search = catalogSearch?.value.trim().toLowerCase() || "";
+    const selectedSize = sizeFilter?.value || "all";
+    const selectedFinish = finishFilter?.value || "all";
+
+    const activeButton = document.querySelector(".category-filter.active");
+    const selectedCategory = activeButton?.dataset.category || "all";
+
+    filteredProducts = allProducts.filter(product => {
+        const searchableText = [
+            product.code,
+            product.name,
+            product.type,
+            product.material,
+            product.description,
+            getCategoryText(product)
+        ].join(" ").toLowerCase();
+
+        return searchableText.includes(search) &&
+            (selectedSize === "all" || product.size === selectedSize) &&
+            (selectedFinish === "all" || product.finish === selectedFinish) &&
+            (selectedCategory === "all" || product.categories.includes(selectedCategory));
     });
 
-    productDialog.showModal();
+    applySorting();
+    renderProducts();
+}
 
-    document.getElementById("detailsEnquire").addEventListener("click", function() {
+/* SORT PRODUCTS */
 
+function applySorting() {
+    const sortValue = sortFilter?.value || "featured";
+
+    if (sortValue === "az") {
+        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortValue === "za") {
+        filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        filteredProducts.sort((a, b) => a.id - b.id);
+    }
+}
+
+/* IMAGE FALLBACK */
+
+function showImageFallback(container) {
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="product-image-fallback">
+            <span>Tile image unavailable</span>
+        </div>
+    `;
+}
+
+/* DISPLAY PRODUCTS */
+
+function renderProducts() {
+    if (!productGrid) return;
+
+    if (productCount) {
+        productCount.textContent =
+            `Showing ${filteredProducts.length} of 25 tile collections`;
+    }
+
+    if (filteredProducts.length === 0) {
+        productGrid.innerHTML = "";
+        if (emptyProducts) emptyProducts.hidden = false;
+        return;
+    }
+
+    if (emptyProducts) emptyProducts.hidden = true;
+
+    productGrid.innerHTML = filteredProducts.map(product => `
+        <article class="product-card">
+            <div class="product-image-wrap">
+                <img
+                    src="${escapeHTML(product.image)}"
+                    alt="${escapeHTML(product.name)}"
+                    class="product-image"
+                    loading="lazy"
+                    onerror="showImageFallback(this.parentElement)"
+                >
+            </div>
+
+            <div class="product-card-content">
+                <p class="product-code">${escapeHTML(product.code)}</p>
+                <h3>${escapeHTML(product.name)}</h3>
+                <p class="product-category">${escapeHTML(product.type)}</p>
+
+                <div class="product-specifications">
+                    <span>${escapeHTML(product.size)}</span>
+                    <span>${escapeHTML(product.finish)}</span>
+                </div>
+
+                <div class="product-card-actions">
+                    <button type="button" data-action="details"
+                        data-code="${product.code}">
+                        View Details
+                    </button>
+
+                    <button type="button" data-action="enquire"
+                        data-code="${product.code}">
+                        Enquire Now
+                    </button>
+                </div>
+            </div>
+        </article>
+    `).join("");
+}
+
+/* CENTRE PRODUCT DETAILS POPUP */
+
+function openProductDetails(code) {
+    const product = allProducts.find(p => p.code === code);
+    const details = document.getElementById("productDetails");
+    const dialog = document.getElementById("productDialog");
+
+    if (!product || !details || !dialog) return;
+
+    details.innerHTML = `
+        <div class="product-detail-layout">
+            <div class="product-detail-image">
+                <img
+                    src="${escapeHTML(product.image)}"
+                    alt="${escapeHTML(product.name)}"
+                    onerror="showImageFallback(this.parentElement)"
+                >
+            </div>
+
+            <div class="product-detail-info">
+                <p class="product-code">${escapeHTML(product.code)}</p>
+                <h2>${escapeHTML(product.name)}</h2>
+
+                <p><strong>Product Code:</strong> ${escapeHTML(product.code)}</p>
+                <p><strong>Category:</strong> ${escapeHTML(getCategoryText(product))}</p>
+                <p><strong>Size:</strong> ${escapeHTML(product.size)}</p>
+                <p><strong>Finish:</strong> ${escapeHTML(product.finish)}</p>
+                <p><strong>Material:</strong> ${escapeHTML(product.material)}</p>
+                <p><strong>Type:</strong> ${escapeHTML(product.type)}</p>
+                <p>${escapeHTML(product.description)}</p>
+
+                <button type="button" id="detailEnquiryButton">
+                    Enquire Now
+                </button>
+            </div>
+        </div>
+    `;
+
+    if (!dialog.open) dialog.showModal();
+
+    document.getElementById("detailEnquiryButton")
+        ?.addEventListener("click", () => openEnquiry(code));
+}
+
+/* CENTRE ENQUIRY POPUP */
+
+function openEnquiry(code) {
+    const product = allProducts.find(p => p.code === code);
+    const enquiryProduct = document.getElementById("enquiryProduct");
+    const enquiryDialog = document.getElementById("enquiryDialog");
+    const productDialog = document.getElementById("productDialog");
+
+    if (!product || !enquiryDialog) return;
+
+    if (enquiryProduct) {
+        enquiryProduct.value = `${product.code} - ${product.name}`;
+    }
+
+    if (productDialog?.open) {
         productDialog.close();
+    }
 
-        openEnquiry(product);
+    if (!enquiryDialog.open) {
+        enquiryDialog.showModal();
+    }
+}
 
+/* CLOSE DIALOG */
+
+function closeDialog(id) {
+    const dialog = document.getElementById(id);
+
+    if (dialog?.open) {
+        dialog.close();
+    }
+}
+
+/* CLOSE WHEN CLICKING OUTSIDE */
+
+["productDialog", "enquiryDialog"].forEach(id => {
+    const dialog = document.getElementById(id);
+
+    dialog?.addEventListener("click", event => {
+        if (event.target === dialog) {
+            dialog.close();
+        }
     });
+});
 
-}
+/* PRODUCT BUTTON EVENTS */
 
-
-// ========================================
-// ENQUIRY POPUP
-// ========================================
-
-function openEnquiry(product) {
-
-    enquiryForm.reset();
-
-    document.getElementById("enquiryProduct").value = product.id;
-
-    document.getElementById("enquiryMessage").value =
-        `I am interested in ${product.name} (${product.size}, ${product.finish}).`;
-
-    document.getElementById("enquirySuccess").hidden = true;
-
-    enquiryDialog.showModal();
-
-}
-
-
-// ========================================
-// PRODUCT BUTTON EVENTS
-// ========================================
-
-productGrid.addEventListener("click", function(event) {
-
+productGrid?.addEventListener("click", event => {
     const button = event.target.closest("button[data-action]");
 
     if (!button) return;
 
-    const product = products.find(item => item.id === button.dataset.id);
-
-    if (!product) return;
+    const code = button.dataset.code;
 
     if (button.dataset.action === "details") {
-
-        openProductDetails(product);
-
+        openProductDetails(code);
     }
 
     if (button.dataset.action === "enquire") {
-
-        openEnquiry(product);
-
+        openEnquiry(code);
     }
-
 });
 
-
-// ========================================
-// CLOSE POPUPS
-// ========================================
-
-document.getElementById("closeProductDialog").addEventListener("click", function() {
-
-    productDialog.close();
-
-});
-
-
-document.getElementById("closeEnquiryDialog").addEventListener("click", function() {
-
-    enquiryDialog.close();
-
-});
-
-
-// ========================================
-// SAVE ENQUIRIES
-// ========================================
-
-enquiryForm.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-    const productId =
-        document.getElementById("enquiryProduct").value;
-
-    const selectedProduct =
-        products.find(item => item.id === productId);
-
-    const enquiry = {
-
-        id: Date.now(),
-
-        name: document.getElementById("enquiryName").value.trim(),
-
-        email: document.getElementById("enquiryEmail").value.trim(),
-
-        phone: document.getElementById("enquiryPhone").value.trim(),
-
-        category: selectedProduct
-            ? categoryNames[selectedProduct.categories[0]] || "General Enquiry"
-            : "General Enquiry",
-
-        message: document.getElementById("enquiryMessage").value.trim(),
-
-        product: selectedProduct ? selectedProduct.name : "",
-
-        status: "New",
-
-        date: new Date().toLocaleString()
-
-    };
-
-    try {
-
-        const savedEnquiries = JSON.parse(
-
-            localStorage.getItem("steveTilesEnquiries") || "[]"
-
-        );
-
-        savedEnquiries.unshift(enquiry);
-
-        localStorage.setItem(
-
-            "steveTilesEnquiries",
-
-            JSON.stringify(savedEnquiries)
-
-        );
-
-        document.getElementById("enquirySuccess").hidden = false;
-
-        enquiryForm.reset();
-
-    } catch (error) {
-
-        alert("Unable to save this enquiry. Please try again.");
-
-        console.error(error);
-
-    }
-
-});
-
-
-// ========================================
-// RESET FILTERS
-// ========================================
-
-document.getElementById("resetFilters").addEventListener("click", function() {
-
-    activeCategory = "all";
-
-    searchInput.value = "";
-
-    sizeFilter.value = "all";
-
-    finishFilter.value = "all";
-
-    sortFilter.value = "featured";
-
-    document.querySelectorAll(".category-filter").forEach(function(button) {
-
-        button.classList.toggle(
-
-            "active",
-
-            button.dataset.category === "all"
-
-        );
-
-    });
-
-    filterProducts();
-
-});
-
-
-// ========================================
-// INITIAL PAGE SETUP
-// ========================================
-
-async function initializeProductsPage() {
-
-    try {
-
-        // First load products from MySQL through Flask.
-
-        await loadProducts();
-
-        // Apply URL search and category settings.
-
-        searchInput.value = initialSearch;
-
-        activeCategory = getCategoryFromURL(initialCategory);
-
-        document.querySelectorAll(".category-filter").forEach(function(button) {
-
-            button.classList.toggle(
-
-                "active",
-
-                button.dataset.category === activeCategory
-
-            );
-
+/* SEARCH AND FILTER EVENTS */
+
+catalogSearch?.addEventListener("input", applyFilters);
+sizeFilter?.addEventListener("change", applyFilters);
+finishFilter?.addEventListener("change", applyFilters);
+sortFilter?.addEventListener("change", applyFilters);
+
+/* CATEGORY BUTTONS */
+
+document.querySelectorAll(".category-filter").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll(".category-filter").forEach(item => {
+            item.classList.remove("active");
         });
 
-        // Display products.
+        button.classList.add("active");
+        applyFilters();
+    });
+});
 
-        filterProducts();
+/* RESET FILTERS */
 
-    } catch (error) {
+document.getElementById("resetFilters")?.addEventListener("click", () => {
+    if (catalogSearch) catalogSearch.value = "";
+    if (sizeFilter) sizeFilter.value = "all";
+    if (finishFilter) finishFilter.value = "all";
+    if (sortFilter) sortFilter.value = "featured";
 
-        // loadProducts already displays an error message.
+    document.querySelectorAll(".category-filter").forEach(item => {
+        item.classList.remove("active");
+    });
 
+    document.querySelector('.category-filter[data-category="all"]')
+        ?.classList.add("active");
+
+    applyFilters();
+});
+
+/* CLOSE BUTTONS */
+
+document.getElementById("closeProductDialog")
+    ?.addEventListener("click", () => closeDialog("productDialog"));
+
+document.getElementById("closeEnquiryDialog")
+    ?.addEventListener("click", () => closeDialog("enquiryDialog"));
+
+/* ENQUIRY FORM */
+
+document.getElementById("productEnquiryForm")?.addEventListener(
+    "submit",
+    event => {
+        event.preventDefault();
+
+        const enquiry = {
+            product: document.getElementById("enquiryProduct")?.value || "",
+            name: document.getElementById("enquiryName")?.value.trim() || "",
+            email: document.getElementById("enquiryEmail")?.value.trim() || "",
+            phone: document.getElementById("enquiryPhone")?.value.trim() || "",
+            message: document.getElementById("enquiryMessage")?.value.trim() || "",
+            date: new Date().toISOString()
+        };
+
+        const enquiries = JSON.parse(
+            localStorage.getItem("steveTilesEnquiries") || "[]"
+        );
+
+        enquiries.push(enquiry);
+
+        localStorage.setItem(
+            "steveTilesEnquiries",
+            JSON.stringify(enquiries)
+        );
+
+        const success = document.getElementById("enquirySuccess");
+
+        if (success) {
+            success.hidden = false;
+            success.textContent = "Your enquiry has been saved successfully!";
+        }
+
+        event.target.reset();
+
+        showSteveToast("Your enquiry has been saved successfully!", "success");
+
+        setTimeout(() => {
+            closeDialog("enquiryDialog");
+
+            if (success) success.hidden = true;
+        }, 1800);
     }
+);
 
-}
+/* INITIALIZE CATALOGUE */
 
-initializeProductsPage();
+populateFilterOptions();
+applyFilters();
+
+console.log("Steve Tiles: 25 products loaded successfully.");
