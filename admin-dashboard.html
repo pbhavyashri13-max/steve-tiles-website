@@ -2141,6 +2141,7 @@ async function uploadGalleryImages() {
     try {
         const response = await fetch(`${GALLERY_API}/api/gallery`, {
             method: "POST",
+            credentials: "include",
             body: formData
         });
 
@@ -2163,6 +2164,7 @@ async function uploadGalleryImages() {
         button.textContent = "Upload Images";
     }
 }
+
 
 // ---------------------------------------------
 // LOAD PERMANENTLY SAVED GALLERY IMAGES
@@ -2256,7 +2258,10 @@ async function deleteGalleryImage(imageId) {
     try {
         const response = await fetch(
             `${GALLERY_API}/api/gallery/${imageId}`,
-            { method: "DELETE" }
+            {
+                method: "DELETE",
+                credentials: "include"
+            }
         );
 
         const result = await response.json();
@@ -2273,6 +2278,7 @@ async function deleteGalleryImage(imageId) {
         showGalleryMessage(error.message || "Image deletion failed.", true);
     }
 }
+
 
 // ---------------------------------------------
 // FILE INPUT
