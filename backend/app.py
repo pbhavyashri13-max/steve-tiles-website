@@ -1663,6 +1663,61 @@ def serve_gallery_image(filename):
     )
 
 
+# ================= CUSTOMER ENQUIRY API =================
+
+@app.route("/api/enquiries", methods=["POST"])
+def save_enquiry():
+
+    connection = None
+    cursor = None
+
+    try:
+        data = request.get_json() or {}
+
+        name = data.get("name", "").strip()
+        email = data.get("email", "").strip()
+        phone = data.get("phone", "").strip()
+        category = data.get("category", "").strip()
+        message = data.get("message", "").strip()
+
+        if not name or not email or not phone or not category or not message:
+            return jsonify({
+                "status": "error",
+                "message": "Please complete all the fields."
+            }), 400
+
+        connection = get_db_connection()
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            INSERT INTO enquiries
+            (name, email, phone, category, message, status)
+            VALUES (%s, %s, %s, %s, %s, 'New')
+        """, (name, email, phone, category, message))
+
+        connection.commit()
+
+        return jsonify({
+            "status": "success",
+            "message": "Enquiry submitted successfully!"
+        }), 201
+
+    except Exception as error:
+        if connection:
+            connection.rollback()
+
+        return jsonify({
+            "status": "error",
+            "message": str(error)
+        }), 500
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if connection and connection.is_connected():
+            connection.close()
+
 # ================= START FLASK SERVER =================
 
 if __name__ == "__main__":

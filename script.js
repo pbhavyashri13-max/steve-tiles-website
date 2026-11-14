@@ -316,35 +316,26 @@ loadHomepageProducts();
 // CUSTOMER ENQUIRY FORM
 // ==================================
 
-const enquiryForm = document.getElementById("enquiryForm");
+// ==================================
+// CUSTOMER ENQUIRY FORM
+// ==================================
 
+const enquiryForm = document.getElementById("enquiryForm");
 const formMessage = document.getElementById("formMessage");
 
 if (enquiryForm && formMessage) {
 
-    enquiryForm.addEventListener("submit", function (event) {
+    enquiryForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
         const enquiry = {
-
-            id: Date.now(),
-
             name: document.getElementById("customerName").value.trim(),
-
             email: document.getElementById("customerEmail").value.trim(),
-
             phone: document.getElementById("customerPhone").value.trim(),
-
             category: document.getElementById("customerCategory").value,
-
-            message: document.getElementById("customerMessage").value.trim(),
-
-            status: "New",
-
-            date: new Date().toLocaleString()
+            message: document.getElementById("customerMessage").value.trim()
         };
-
 
         if (
             !enquiry.name ||
@@ -353,31 +344,30 @@ if (enquiryForm && formMessage) {
             !enquiry.category ||
             !enquiry.message
         ) {
-
-            formMessage.textContent =
-                "Please complete all the fields.";
-
+            formMessage.textContent = "Please complete all the fields.";
             return;
         }
 
-
         try {
 
-            const savedEnquiries = JSON.parse(
+            formMessage.textContent = "Submitting enquiry...";
 
-                localStorage.getItem("steveTilesEnquiries") || "[]"
-
+            const response = await fetch(
+                `${API_BASE_URL}/api/enquiries`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(enquiry)
+                }
             );
 
-            savedEnquiries.push(enquiry);
+            const result = await response.json();
 
-            localStorage.setItem(
-
-                "steveTilesEnquiries",
-
-                JSON.stringify(savedEnquiries)
-
-            );
+            if (!response.ok || result.status !== "success") {
+                throw new Error(result.message || "Unable to submit enquiry.");
+            }
 
             formMessage.textContent =
                 "Thank you! Your enquiry has been submitted successfully.";
@@ -386,16 +376,15 @@ if (enquiryForm && formMessage) {
 
         } catch (error) {
 
-            formMessage.textContent =
-                "Unable to save your enquiry. Please try again.";
+            console.error("Enquiry error:", error);
 
-            console.error(
-                "Enquiry storage error:",
-                error
-            );
+            formMessage.textContent =
+                "Unable to submit enquiry. Please try again.";
         }
     });
 }
+
+
 
 
 console.log("Steve Tiles website loaded successfully.");
