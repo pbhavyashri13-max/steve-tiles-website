@@ -1718,6 +1718,52 @@ def save_enquiry():
         if connection and connection.is_connected():
             connection.close()
 
+
+
+# ================= ADMIN: VIEW CUSTOMER ENQUIRIES =================
+
+@app.route("/api/enquiries", methods=["GET"])
+@admin_required
+def get_enquiries():
+
+    connection = None
+    cursor = None
+
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT id, name, email, phone, category,
+                   message, status, created_at
+            FROM enquiries
+            ORDER BY id DESC
+        """)
+
+        enquiries = cursor.fetchall()
+
+        for item in enquiries:
+            if item["created_at"]:
+                item["created_at"] = str(item["created_at"])
+
+        return jsonify({
+            "status": "success",
+            "enquiries": enquiries
+        })
+
+    except Exception as error:
+        return jsonify({
+            "status": "error",
+            "message": str(error)
+        }), 500
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if connection and connection.is_connected():
+            connection.close()
+
 # ================= START FLASK SERVER =================
 
 if __name__ == "__main__":

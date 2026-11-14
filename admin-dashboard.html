@@ -884,20 +884,29 @@ tbody tr:hover {background:#fcfbf8}
 
 </section>
 
+<!-- ENQUIRIES -->
+<section class="page" id="page-enquiries">
+    <div class="page-heading">
+        <div>
+            <h1>Customer Enquiries</h1>
+            <p>View enquiries submitted by customers.</p>
+        </div>
+        <button class="secondary" onclick="loadEnquiries()">↻ Refresh</button>
+    </div>
 
-            <!-- ENQUIRIES -->
-            <section class="page" id="page-enquiries">
-                <div class="page-heading">
-                    <div><h1>Customer Enquiries</h1><p>View enquiries saved by the customer website.</p></div>
-                    <button class="secondary" onclick="loadEnquiries()">↻ Refresh</button>
-                </div>
-                <div class="note-box">This dashboard reads the browser localStorage key <b>steveTilesEnquiries</b>. Your current Flask backend does not yet store enquiries in MySQL.</div>
-                <div class="panel">
-                    <div class="panel-header"><div><h2>Enquiry List</h2></div><button class="danger small-button" onclick="clearEnquiries()">Clear Browser Enquiries</button></div>
-                    <div id="enquiryList"><div class="empty">Loading enquiries...</div></div>
-                </div>
-            </section>
+    <div class="note-box">
+        Customer enquiries are stored securely in the database.
+    </div>
 
+    <div class="panel">
+        <div class="panel-header">
+            <div><h2>Enquiry List</h2></div>
+        </div>
+        <div id="enquiryList">
+            <div class="empty">Loading enquiries...</div>
+        </div>
+    </div>
+</section>
   
 <!-- WEBSITE SETTINGS -->
 <section class="page" id="page-settings">
@@ -1369,8 +1378,62 @@ async function loadCategories() {
     }
 }
 
-/* DASHBOARD STATS */
 
+async function loadEnquiries() {
+    const container = document.getElementById("enquiryList");
+
+    container.innerHTML = '<div class="empty">Loading enquiries...</div>';
+
+    try {
+        const response = await fetch(`${GALLERY_API}/api/enquiries`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || result.status !== "success") {
+            throw new Error(result.message || "Unable to load enquiries.");
+        }
+
+        const enquiries = result.enquiries || [];
+
+        updateStats();
+
+        if (!enquiries.length) {
+            container.innerHTML =
+                '<div class="empty">No customer enquiries found.</div>';
+            return;
+        }
+
+        container.innerHTML = enquiries.map((item, index) => `
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>${escapeHTML(item.name || "Customer")}</h2>
+                        <p>Enquiry ${index + 1} | ${escapeHTML(item.status || "New")}</p>
+                    </div>
+                </div>
+
+                <p style="font-size:12px;line-height:1.9">
+                    <b>Email:</b> ${escapeHTML(item.email || "—")}<br>
+                    <b>Phone:</b> ${escapeHTML(item.phone || "—")}<br>
+                    <b>Category:</b> ${escapeHTML(item.category || "—")}<br>
+                    <b>Message:</b> ${escapeHTML(item.message || "—")}<br>
+                    <b>Date:</b> ${escapeHTML(item.created_at || "—")}
+                </p>
+            </div>
+        `).join("");
+
+    } catch (error) {
+        console.error("Enquiry loading error:", error);
+        container.innerHTML =
+            '<div class="empty">Unable to load enquiries. Please refresh.</div>';
+    }
+}
+
+
+/* DASHBOARD STATS */
 function updateStats() {
     const activeProducts = products.filter(p => Number(p.is_active) === 1);
     const activeCategories = categories.filter(c => Number(c.is_active) === 1);
@@ -1378,15 +1441,7 @@ function updateStats() {
     document.getElementById("totalProducts").textContent = activeProducts.length;
     document.getElementById("totalCategories").textContent = activeCategories.length;
     document.getElementById("totalImages").textContent = activeProducts.filter(p => p.image).length;
-
-    let enquiries = [];
-
-    try {
-        enquiries = JSON.parse(localStorage.getItem("steveTilesEnquiries") || "[]");
-        if (!Array.isArray(enquiries)) enquiries = [];
-    } catch(e) {}
-
-    document.getElementById("totalEnquiries").textContent = enquiries.length;
+    document.getElementById("totalEnquiries").textContent = 0;
 }
 
 /* RECENT ACTIVE PRODUCTS */
